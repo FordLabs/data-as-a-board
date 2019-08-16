@@ -1,0 +1,119 @@
+/*
+ * Copyright (c) 2019 Ford Motor Company
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations under the License.
+ *
+ */
+
+.dashboard {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #222;
+    background-size: contain;
+}
+
+.radiatorPageIndicators {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radiatorPageIndicator {
+    margin: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    box-sizing: content-box;
+
+    transition-property: margin, width, height;
+    transition-timing-function: ease-in-out;
+}
+
+.radiatorPageIndicator:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.radiatorPageIndicatorActive {
+    composes: radiatorPageIndicator;
+    margin: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.radiatorCarousel {
+    height: calc(100vh + 17px);
+    margin: 0;
+    padding: 0 0 17px;
+    position: fixed;
+    top: 17px;
+    left: 0;
+
+    transition: left 1s ease;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    white-space: nowrap;
+    overflow: auto;
+    overflow-y: hidden;
+}
+
+.disconnectedDisplayWrapper {
+    z-index: 1000;
+    font-family: 'Montserrat', sans-serif;
+    position: fixed;
+    background-color: #B71C1C;
+    color: #FFF;
+    left: 10px;
+    bottom: 10px;
+    border-radius: 5px;
+    height: 80px;
+    padding: 10px 30px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.disconnectedDisplayHeader {
+    font-size: 48px;
+}
+
+.disconnectedDisplayIcon > *:first-child {
+    font-size: 48px;
+    overflow-x: hidden;
+}
+
+.disconnectedDisplayReload {
+    font-size: 48px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #ddd;
+    background-color: #0004;
+    cursor: pointer;
+}

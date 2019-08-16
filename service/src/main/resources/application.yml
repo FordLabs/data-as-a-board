@@ -1,0 +1,36 @@
+# The following is a working configuration file so that when DaaB is run locally, users can see sample data.
+# Here we configure weather for Dearborn and Upwise quotes.  See application-sample.yml for more examples.
+
+{
+  "event":
+    {
+      "quote": { "upwise": { "enabled": true } },
+      "weather":{
+        "nws": [
+        {
+          "id": "dearborn",
+          "name": "Dearborn",
+          "lat": 42.2078,
+          "lon": -83.3755,
+        },
+        ]
+      }
+    },
+  "radiator":
+    {
+      "name": "Example Radiator",
+      "pages":
+        [
+        {
+          "name": "",
+          "events":
+            [
+            { "id": "weather.dearborn", "row": 0, "column": 1 },
+            { "id": "quote.upwise", "row": 0, "column": 2, "width": 1 }
+            ],
+          "rows": 3,
+          "columns": 5,
+        },
+        ],
+    },
+}

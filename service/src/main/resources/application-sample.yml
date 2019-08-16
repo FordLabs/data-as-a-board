@@ -1,0 +1,95 @@
+# The following is a sample configuration file.
+# The configuration can be provided as YAML or JSON (or any other format that Spring supports)
+# The sample is taken from the FordLabs DaaB instance, with some additional examples for publishers
+#   not used by the FordLabs instance.
+
+event:
+  quote:
+    upwise:
+      enabled: true
+    hourOfPower:
+      - id: fordlabs
+        teamId: 3
+  list:
+    retroquest:
+    #- name: %%boardName%%
+    #  displayName: %%Board Display Name%%
+    #  password: %%boardPassword%%
+  weather:
+    nws:
+      - id: annarbor
+        name: Ann Arbor
+        lat: 42.2794
+        lon: -83.7437
+      - id: dearborn
+        name: Dearborn
+        lat: 42.2078
+        lon: -83.3755
+  health:
+    applications:
+      #- id: github
+      #  name: GitHub
+      #  url: https://github.ford.com/api/v3/status,
+      #  username: %%user_cdsid%%
+      #  password: %%user_personal_access_token%%
+      - id: pcfpreprod
+        name: PCF EDC1 (Pre-Prod)
+        url: https://api.sys.pp01.edc1.cf.ford.com/v2/info
+      - id: pcfprod
+        name: PCF EDC1 (Prod),
+        url: https://api.sys.pd01.edc1.cf.ford.com/v2/info
+  job:
+    jenkins:
+      username: "####"
+      token: "####"
+      jobs:
+        - id: my-app
+          name: "My App"
+          url: "jenkinsurl/job/my-app/api/json"
+  statistics:
+    appcenter:
+      token: "#######"
+      apps:
+        - ownername: "owner"
+          appname: "appname"
+
+radiator:
+  name: Sample
+  pages:
+    - name: Today
+      rows: 3
+      columns: 5
+      events:
+        - id: weather.annarbor
+          row: 0
+          column: 0
+        - id: weather.dearborn
+          row: 0
+          column: 0
+        - id: quote.hourofpower.fordlabs
+          row: 0
+          column: 1
+        - id: health.github
+          row: 1
+          column: 0
+        - id: health.pcfpreprod
+          row: 1
+          column: 1
+        - id: health.pcfprod
+          row: 1
+          column: 2
+        - id: quote.upwise
+          row: 2
+          column: 0
+          width: 3
+        - id: list.standup.annarbor
+          row: 0
+          column: 3
+          width: 2
+          height: 3
+    - name: Pipeline
+      rows: 1
+      columns: 4
+      events:
+        - id: list.pipeline
+          width: 4

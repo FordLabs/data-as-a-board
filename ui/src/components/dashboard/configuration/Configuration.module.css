@@ -1,0 +1,250 @@
+/*
+ * Copyright (c) 2019 Ford Motor Company
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations under the License.
+ *
+ */
+
+.container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    font-family: "Montserrat", sans-serif;
+}
+
+.form {
+    width: 100%;
+    max-height: 100%;
+    padding: 0 20px 20px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 10px
+}
+
+.formInputs {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    gap: 10px
+}
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+}
+
+.label {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.button {
+    padding: 10px;
+    border-radius: 0;
+    border: 0;
+    font-size: 18px;
+}
+
+.button.success {
+    background-color: #00C853;
+}
+
+.editBoardContainer {
+    overflow: auto;
+    padding: 10px;
+    background: repeating-linear-gradient(
+            45deg,
+            #222,
+            #222 10px,
+            #282828 10px,
+            #282828 20px
+    );
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.editBoard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+    overflow: auto;
+}
+
+.editBoardPage {
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    display: grid;
+    grid-template-rows: 80px 1fr 50px;
+    grid-template-columns: 50px 1fr 50px;
+    grid-gap: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 5px;
+    gap: 5px;
+}
+
+.editBoardPageName {
+    grid-column-start: 2;
+}
+
+.editBoardPageGrid {
+    display: grid;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    flex-grow: 1;
+    padding: 10px;
+    grid-gap: 10px;
+    background-color: #222;
+}
+
+.editBoardPageEmptySpot {
+    overflow: hidden;
+    grid-column-end: span 1;
+    grid-row-end: span 1;
+    color: #FFFFFF;
+    background-color: #282828;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.editBoardPageEmptySpot:hover, .editBoardPageEmptySpot.hover {
+    background-color: #383838;
+}
+
+.editBoardPageEmptySpot > .addEvent {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.editBoardPageEmptySpot:hover > .addEvent {
+    opacity: 1;
+}
+
+.addEventForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.addEventButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editBoardEvent {
+    background-color: #444;
+    color: #fff;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+}
+
+.editBoardEventActions {
+    opacity: 0;
+    background-color: #0004;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 60px;
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.editBoardEventDimensions {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.editBoardEvent:hover > .editBoardEventActions {
+    opacity: 1;
+}
+
+.editBoardPageAddRemoveColumn,
+.editBoardPageAddRemoveRow {
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editBoardPageAddRemoveColumn {
+    grid-column-start: 3;
+    grid-row-start: 2;
+    flex-direction: column;
+}
+
+
+.editBoardPageAddRemoveRow {
+    grid-column-start: 2;
+    grid-row-start: 3;
+}
+
+.addRemovePage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 10px;
+    color: #fff;
+}
+
+.addRemoveButton {
+    background-color: #444;
+    color: #fff;
+    margin: 10px;
+    border: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.addRemoveButton:hover {
+    background-color: #666;
+}
