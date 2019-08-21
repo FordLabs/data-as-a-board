@@ -18,17 +18,27 @@ package com.ford.labs.daab.config;
 
 import com.ford.labs.daab.publishers.endpoint.EndpointPublisherHandler;
 import com.ford.labs.daab.subscribers.CachedEventSubscriberHandler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 @Configuration
 public class RouterConfiguration {
+    @Bean
+    public RouterFunction<ServerResponse> staticPagesFunction(@Value("classpath:META-INF/resources/index.html") Resource index) {
+        return route()
+                .GET("/", request -> ok().contentType(MediaType.TEXT_HTML).syncBody(index))
+                .build();
+    }
+
     @Bean
     public RouterFunction<ServerResponse> endpointPublisherFunction(EndpointPublisherHandler handler) {
         return route()
