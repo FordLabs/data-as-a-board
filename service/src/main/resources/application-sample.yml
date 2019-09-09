@@ -25,19 +25,6 @@ event:
         name: Dearborn
         lat: 42.2078
         lon: -83.3755
-  health:
-    applications:
-      #- id: github
-      #  name: GitHub
-      #  url: https://github.ford.com/api/v3/status,
-      #  username: %%user_cdsid%%
-      #  password: %%user_personal_access_token%%
-      - id: pcfpreprod
-        name: PCF EDC1 (Pre-Prod)
-        url: https://api.sys.pp01.edc1.cf.ford.com/v2/info
-      - id: pcfprod
-        name: PCF EDC1 (Prod),
-        url: https://api.sys.pd01.edc1.cf.ford.com/v2/info
   job:
     jenkins:
       username: "####"
