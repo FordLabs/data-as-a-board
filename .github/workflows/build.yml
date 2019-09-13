@@ -19,3 +19,8 @@ jobs:
         node-version: '10.x'
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Release artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: data-as-a-board.jar
+        path: service/build/libs/service-0.0.1-SNAPSHOT.jar
