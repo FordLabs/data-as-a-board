@@ -76,3 +76,7 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
+bootJar {
+    archiveFileName = "data-as-a-board.jar"
+}
