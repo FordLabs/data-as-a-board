@@ -14,9 +14,7 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.ford.labs.daab.event;import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -41,7 +39,8 @@ import java.time.format.DateTimeFormatter;
 })
 public class Event {
     String id;
-    @JsonIgnore String eventType;
+    @JsonIgnore
+    String eventType;
     EventLevel level = EventLevel.OK;
     String name;
     String time = OffsetDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);

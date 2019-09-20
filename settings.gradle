@@ -15,4 +15,5 @@
  */
 
 rootProject.name = 'daab'
-include 'service', 'ui'
+include 'service', 'ui', 'event'
+

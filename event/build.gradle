@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'com.ford.labs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:latest.release'
+    annotationProcessor 'org.projectlombok:lombok:latest.release'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:latest.release'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:latest.release'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:latest.release'
+    testImplementation 'org.assertj:assertj-core:latest.release'
+}
+
+test {
+    useJUnitPlatform()
+}

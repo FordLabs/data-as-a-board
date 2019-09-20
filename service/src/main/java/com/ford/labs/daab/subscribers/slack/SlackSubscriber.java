@@ -18,7 +18,7 @@ package com.ford.labs.daab.subscribers.slack;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ford.labs.daab.model.event.*;
+import com.ford.labs.daab.event.*;
 import com.ford.labs.daab.subscribers.EventSubscriptionService;
 import org.slf4j.Logger;
 import org.springframework.scheduling.annotation.Async;
@@ -71,7 +71,7 @@ public class SlackSubscriber {
                 .filter(Objects::nonNull)
                 .doOnEach(event -> {
                     if (event.get() != null) {
-                        log.info("Event: " + event.get().getId());
+                        log.info("com.ford.labs.daab.event.Event: " + event.get().getId());
                         log.info("Level: " + event.get().getLevel());
                         log.info("Current bad events: " + badEvents.toString());
                     }

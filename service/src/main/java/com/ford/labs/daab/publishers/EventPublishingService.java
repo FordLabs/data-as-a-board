@@ -18,7 +18,7 @@ package com.ford.labs.daab.publishers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.Event;
 import org.slf4j.Logger;
 import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
@@ -43,7 +43,7 @@ public class EventPublishingService {
                                 .map(existingEvent -> existingEvent.equals(event))
                                 .flatMap(eventIsUnchanged -> {
                                     if (eventIsUnchanged) {
-                                        log.info(String.format("Event [%s] is unchanged: %s", event.getId(), eventToString(event)));
+                                        log.info(String.format("com.ford.labs.daab.event.Event [%s] is unchanged: %s", event.getId(), eventToString(event)));
                                         return Mono.empty();
                                     } else {
                                         return saveAndPublishEvent(event);
@@ -80,7 +80,7 @@ public class EventPublishingService {
     }
 
     private Mono<Long> saveAndPublishEvent(Event event) {
-        log.info(String.format("Publishing Event: [%s]: %s", event.getId(), eventToString(event)));
+        log.info(String.format("Publishing com.ford.labs.daab.event.Event: [%s]: %s", event.getId(), eventToString(event)));
 
         return saveEventToCache(event)
                 .then(publishEventToQueue(event));

@@ -16,7 +16,6 @@
 
 package com.ford.labs.daab.subscribers;
 
-import com.ford.labs.daab.model.event.Event;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;

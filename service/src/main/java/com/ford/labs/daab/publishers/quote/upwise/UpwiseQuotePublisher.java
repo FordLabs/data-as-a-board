@@ -18,8 +18,8 @@ package com.ford.labs.daab.publishers.quote.upwise;
 
 import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.quote.QuoteProperties;
-import com.ford.labs.daab.model.event.EventLevel;
-import com.ford.labs.daab.model.event.QuoteEvent;
+import com.ford.labs.daab.event.EventLevel;
+import com.ford.labs.daab.event.QuoteEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import lombok.AllArgsConstructor;
 import lombok.Data;

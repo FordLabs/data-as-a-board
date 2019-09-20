@@ -14,30 +14,42 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
+package com.ford.labs.daab.event;import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ListEvent extends Event {
-    private List<Section> sections;
+public class JobEvent extends Event {
+    Status status;
+    String url;
 
     @Override
     public String getEventType() {
-        return EventType.LIST;
+        return EventType.JOB;
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Section {
-        private String name;
-        private List<String> items;
+    @Override
+    public EventLevel getLevel() {
+        switch (status) {
+            case DISABLED:
+                return EventLevel.DISABLED;
+            case IN_PROGRESS:
+                return EventLevel.INFO;
+            case SUCCESS:
+                return EventLevel.OK;
+            case FAILURE:
+                return EventLevel.ERROR;
+            case UNKNOWN:
+            default:
+                return EventLevel.UNKNOWN;
+        }
+    }
+
+    public enum Status {
+        UNKNOWN,
+        DISABLED,
+        IN_PROGRESS,
+        SUCCESS,
+        FAILURE
     }
 }

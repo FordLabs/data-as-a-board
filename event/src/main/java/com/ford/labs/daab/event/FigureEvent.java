@@ -14,9 +14,7 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
-
-import lombok.Data;
+package com.ford.labs.daab.event;import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data

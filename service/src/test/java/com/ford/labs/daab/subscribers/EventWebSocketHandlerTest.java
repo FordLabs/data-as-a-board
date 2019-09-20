@@ -18,8 +18,8 @@ package com.ford.labs.daab.subscribers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ford.labs.daab.model.event.HealthEvent;
-import com.ford.labs.daab.model.event.JobEvent;
+import com.ford.labs.daab.event.HealthEvent;
+import com.ford.labs.daab.event.JobEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

@@ -16,7 +16,7 @@
 
 package com.ford.labs.daab.config;
 
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.Event;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

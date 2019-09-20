@@ -14,7 +14,7 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
+package com.ford.labs.daab.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -27,35 +27,40 @@ class EventMappingTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @Test void mapsUnknownEventToEventClass() throws IOException {
+    @Test
+    void mapsUnknownEventToEventClass() throws IOException {
         String json = "{\"id\": \"unknown.thing\", \"eventType\": \"UNKNOWN\", \"name\": \"Thing\", \"time\": \"2018-01-01T00:00:000Z\"}";
         Event event = mapper.readValue(json, Event.class);
 
         assertThat(event).isInstanceOf(Event.class);
     }
 
-    @Test void mapsJobEventToJobClass() throws IOException {
+    @Test
+    void mapsJobEventToJobClass() throws IOException {
         String json = "{\"id\": \"job.thing\", \"eventType\": \"JOB\", \"name\": \"Thing\", \"time\": \"2018-01-01T00:00:000Z\", \"status\": \"SUCCESS\"}";
         Event event = mapper.readValue(json, Event.class);
 
         assertThat(event).isInstanceOf(JobEvent.class);
     }
 
-    @Test void mapsFigureEventToFigureClass() throws IOException {
+    @Test
+    void mapsFigureEventToFigureClass() throws IOException {
         String json = "{\"id\": \"job.thing\", \"eventType\": \"FIGURE\", \"name\": \"Thing\", \"time\": \"2018-01-01T00:00:000Z\", \"value\": \"12\", \"subtext\": \"daily active users\"}";
         Event event = mapper.readValue(json, Event.class);
 
         assertThat(event).isInstanceOf(FigureEvent.class);
     }
 
-    @Test void mapsHealthEventToHealthClass() throws IOException {
+    @Test
+    void mapsHealthEventToHealthClass() throws IOException {
         String json = "{\"id\": \"job.thing\", \"eventType\": \"HEALTH\", \"name\": \"Thing\", \"time\": \"2018-01-01T00:00:000Z\", \"status\": \"UP\"}";
         Event event = mapper.readValue(json, Event.class);
 
         assertThat(event).isInstanceOf(HealthEvent.class);
     }
 
-    @Test void mapsPercentageEventToPercentageClass() throws IOException {
+    @Test
+    void mapsPercentageEventToPercentageClass() throws IOException {
         String json = "{\"id\": \"job.thing\", \"eventType\": \"PERCENTAGE\", \"name\": \"Thing\", \"time\": \"2018-01-01T00:00:000Z\", \"value\": 0.9876}";
         Event event = mapper.readValue(json, Event.class);
 

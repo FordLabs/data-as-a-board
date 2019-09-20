@@ -48,7 +48,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-	runtimeOnly project(path: ':ui', configuration: 'web')
+    implementation project(":event")
+    runtimeOnly project(path: ':ui', configuration: 'web')
 
     implementation 'org.apache.httpcomponents:httpclient'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -57,7 +58,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
     implementation 'org.springframework.cloud:spring-cloud-spring-service-connector'
     implementation 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
-    
+
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'

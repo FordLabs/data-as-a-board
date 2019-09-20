@@ -17,8 +17,8 @@
 package com.ford.labs.daab.subscribers.slack;
 
 import com.ford.labs.daab.WireMockExtension;
-import com.ford.labs.daab.model.event.HealthEvent;
-import com.ford.labs.daab.model.event.JobEvent;
+import com.ford.labs.daab.event.HealthEvent;
+import com.ford.labs.daab.event.JobEvent;
 import com.ford.labs.daab.subscribers.EventSubscriptionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

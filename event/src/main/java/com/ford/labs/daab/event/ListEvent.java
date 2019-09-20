@@ -14,17 +14,28 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
-
+package com.ford.labs.daab.event;import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class QuoteEvent extends Event {
-    String quote;
-    String author;
+public class ListEvent extends Event {
+    private List<Section> sections;
 
     @Override
-    public String getEventType() { return EventType.QUOTE; }
+    public String getEventType() {
+        return EventType.LIST;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Section {
+        private String name;
+        private List<String> items;
+    }
 }
