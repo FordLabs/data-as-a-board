@@ -14,16 +14,16 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
-
-import lombok.Data;
+package com.ford.labs.daab.event;import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ImageEvent extends Event {
-    String src;
+public class WeatherEvent extends Event {
+    String condition;
+    int temperature;
+    String temperatureUnit;
 
     @Override
-    public String getEventType() { return EventType.IMAGE; }
+    public String getEventType() { return EventType.WEATHER; }
 }

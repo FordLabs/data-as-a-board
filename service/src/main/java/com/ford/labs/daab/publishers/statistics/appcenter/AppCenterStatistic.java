@@ -17,7 +17,7 @@
 package com.ford.labs.daab.publishers.statistics.appcenter;
 
 import com.ford.labs.daab.config.event.properties.statistics.AppCenterApp;
-import com.ford.labs.daab.model.event.StatisticsEvent;
+import com.ford.labs.daab.event.StatisticsEvent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

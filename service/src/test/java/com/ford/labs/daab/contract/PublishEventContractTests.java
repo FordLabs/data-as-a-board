@@ -190,7 +190,7 @@ public class PublishEventContractTests {
 
     private ResponseSpec deleteTo(String endpoint, String key) throws Exception {
         return tc.delete().uri(endpoint)
-                .header("X-Event-Key", key)
+                .header("X-com.ford.labs.daab.event.Event-Key", key)
                 .exchange();
     }
 
@@ -201,7 +201,7 @@ public class PublishEventContractTests {
     private ResponseSpec postTo(String endpoint, Object body, String key) throws Exception {
         return tc.post()
                 .uri(endpoint)
-                .header("X-Event-Key", key)
+                .header("X-com.ford.labs.daab.event.Event-Key", key)
                 .contentType(MediaType.APPLICATION_JSON)
                 .syncBody(body)
                 .exchange();

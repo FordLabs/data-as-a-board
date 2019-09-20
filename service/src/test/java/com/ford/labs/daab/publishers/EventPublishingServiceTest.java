@@ -16,7 +16,7 @@
 
 package com.ford.labs.daab.publishers;
 
-import com.ford.labs.daab.model.event.HealthEvent;
+import com.ford.labs.daab.event.HealthEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.redis.core.ReactiveHashOperations;
@@ -45,7 +45,7 @@ class EventPublishingServiceTest {
     void publish_ifNotPresent_savesInCacheAndPublishes() {
         HealthEvent event = new HealthEvent();
         event.setId("id");
-        event.setName("Health Event Name");
+        event.setName("Health com.ford.labs.daab.event.Event Name");
         event.setStatus(HealthEvent.Status.UP);
         event.setTime("2018-01-01T00:00:00.000Z");
 
@@ -68,7 +68,7 @@ class EventPublishingServiceTest {
     void publish_ifPresent_ifUnchanged_doesNotSaveOrPublish() {
         HealthEvent event = new HealthEvent();
         event.setId("id");
-        event.setName("Health Event Name");
+        event.setName("Health com.ford.labs.daab.event.Event Name");
         event.setStatus(HealthEvent.Status.UP);
         event.setTime("2018-01-01T00:00:00.000Z");
 
@@ -91,13 +91,13 @@ class EventPublishingServiceTest {
     void publish_ifPresent_ifChanged_savesInCacheAndPublishes() {
         HealthEvent cachedEvent = new HealthEvent();
         cachedEvent.setId("id");
-        cachedEvent.setName("Health Event Name");
+        cachedEvent.setName("Health com.ford.labs.daab.event.Event Name");
         cachedEvent.setStatus(HealthEvent.Status.UP);
         cachedEvent.setTime("2018-01-01T00:00:00.000Z");
 
         HealthEvent newEvent = new HealthEvent();
         newEvent.setId("id");
-        newEvent.setName("Health Event Name");
+        newEvent.setName("Health com.ford.labs.daab.event.Event Name");
         newEvent.setStatus(HealthEvent.Status.DOWN);
         newEvent.setTime("2018-01-02T00:00:00.000Z");
 

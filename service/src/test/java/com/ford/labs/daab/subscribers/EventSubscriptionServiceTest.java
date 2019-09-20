@@ -16,11 +16,11 @@
 
 package com.ford.labs.daab.subscribers;
 
-import com.ford.labs.daab.model.event.Event;
-import com.ford.labs.daab.model.event.EventType;
-import com.ford.labs.daab.model.event.HealthEvent;
-import com.ford.labs.daab.model.event.JobEvent;
-import com.ford.labs.daab.model.event.StatisticsEvent;
+import com.ford.labs.daab.event.Event;
+import com.ford.labs.daab.event.EventType;
+import com.ford.labs.daab.event.HealthEvent;
+import com.ford.labs.daab.event.JobEvent;
+import com.ford.labs.daab.event.StatisticsEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.redis.connection.ReactiveSubscription;

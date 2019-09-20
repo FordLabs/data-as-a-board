@@ -35,6 +35,6 @@ public class EventAlreadyRegisteredException extends ResponseStatusException {
     }
 
     private static String buildReason(String id) {
-        return String.format("Event [%s] is already registered", id);
+        return String.format("com.ford.labs.daab.event.Event [%s] is already registered", id);
     }
 }

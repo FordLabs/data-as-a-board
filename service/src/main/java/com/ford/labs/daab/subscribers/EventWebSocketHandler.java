@@ -18,8 +18,8 @@ package com.ford.labs.daab.subscribers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ford.labs.daab.model.event.EventType;
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.EventType;
+import com.ford.labs.daab.event.Event;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketSession;

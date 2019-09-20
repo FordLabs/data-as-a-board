@@ -14,13 +14,14 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
+package com.ford.labs.daab.event;import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public enum EventLevel {
-    OK,
-    UNKNOWN,
-    DISABLED,
-    INFO,
-    WARN,
-    ERROR
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class PercentageEvent extends Event {
+    Double value;
+
+    @Override
+    public String getEventType() { return EventType.PERCENTAGE; }
 }

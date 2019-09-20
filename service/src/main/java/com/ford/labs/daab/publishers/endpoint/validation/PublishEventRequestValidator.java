@@ -16,7 +16,7 @@
 
 package com.ford.labs.daab.publishers.endpoint.validation;
 
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.Event;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

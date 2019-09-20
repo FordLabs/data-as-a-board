@@ -35,6 +35,6 @@ public class EventNotRegisteredException extends ResponseStatusException {
     }
 
     private static String buildReason(String id) {
-        return String.format("Event [%s] is not registered", id);
+        return String.format("com.ford.labs.daab.event.Event [%s] is not registered", id);
     }
 }

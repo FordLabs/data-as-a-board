@@ -16,8 +16,8 @@
 
 package com.ford.labs.daab.subscribers;
 
-import com.ford.labs.daab.model.event.EventType;
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.EventType;
+import com.ford.labs.daab.event.Event;
 import org.springframework.data.redis.connection.ReactiveSubscription;
 import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;

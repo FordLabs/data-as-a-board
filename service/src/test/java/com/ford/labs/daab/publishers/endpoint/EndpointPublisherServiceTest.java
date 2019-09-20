@@ -16,10 +16,9 @@
 
 package com.ford.labs.daab.publishers.endpoint;
 
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.Event;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import com.ford.labs.daab.publishers.endpoint.exception.EventAlreadyRegisteredException;
-import com.ford.labs.daab.publishers.endpoint.exception.EventNotRegisteredException;
 import com.ford.labs.daab.publishers.endpoint.exception.IncorrectKeyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

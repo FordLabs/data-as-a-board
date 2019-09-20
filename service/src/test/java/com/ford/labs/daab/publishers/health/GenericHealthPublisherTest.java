@@ -20,7 +20,7 @@ import com.ford.labs.daab.WireMockExtension;
 import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.health.HealthApplication;
 import com.ford.labs.daab.config.event.properties.health.HealthProperties;
-import com.ford.labs.daab.model.event.HealthEvent;
+import com.ford.labs.daab.event.HealthEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

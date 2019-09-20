@@ -25,7 +25,7 @@ import com.ford.labs.daab.publishers.endpoint.model.RegistrationRequest;
 import com.ford.labs.daab.publishers.endpoint.model.RegistrationResponse;
 import com.ford.labs.daab.publishers.endpoint.validation.PublishEventRequestValidator;
 import com.ford.labs.daab.publishers.endpoint.validation.RegistrationRequestValidator;
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.Event;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -85,7 +85,7 @@ public class EndpointPublisherHandler {
     }
 
     private String getUserKey(ServerRequest request) {
-        List<String> headerValues = request.headers().header("X-Event-Key");
+        List<String> headerValues = request.headers().header("X-com.ford.labs.daab.event.Event-Key");
 
         return headerValues.isEmpty() ? null : headerValues.get(0);
     }

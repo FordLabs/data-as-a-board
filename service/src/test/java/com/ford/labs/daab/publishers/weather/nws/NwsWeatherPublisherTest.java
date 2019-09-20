@@ -17,17 +17,13 @@
 package com.ford.labs.daab.publishers.weather.nws;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import com.ford.labs.daab.WireMockExtension;
 import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.weather.NwsWeatherProperties;
 import com.ford.labs.daab.config.event.properties.weather.WeatherProperties;
-import com.ford.labs.daab.model.event.Event;
-import com.ford.labs.daab.model.event.ListEvent;
-import com.ford.labs.daab.model.event.WeatherEvent;
+import com.ford.labs.daab.event.Event;
+import com.ford.labs.daab.event.WeatherEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -19,7 +19,7 @@ package com.ford.labs.daab.publishers.health;
 import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.health.HealthApplication;
 import com.ford.labs.daab.config.event.properties.health.HealthProperties;
-import com.ford.labs.daab.model.event.HealthEvent;
+import com.ford.labs.daab.event.HealthEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

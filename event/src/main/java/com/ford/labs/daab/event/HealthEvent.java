@@ -14,32 +14,25 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
-
-import lombok.Data;
+package com.ford.labs.daab.event;import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class JobEvent extends Event {
+public class HealthEvent extends Event {
     Status status;
-    String url;
 
     @Override
     public String getEventType() {
-        return EventType.JOB;
+        return EventType.HEALTH;
     }
 
     @Override
     public EventLevel getLevel() {
         switch (status) {
-            case DISABLED:
-                return EventLevel.DISABLED;
-            case IN_PROGRESS:
-                return EventLevel.INFO;
-            case SUCCESS:
+            case UP:
                 return EventLevel.OK;
-            case FAILURE:
+            case DOWN:
                 return EventLevel.ERROR;
             case UNKNOWN:
             default:
@@ -48,10 +41,8 @@ public class JobEvent extends Event {
     }
 
     public enum Status {
-        UNKNOWN,
-        DISABLED,
-        IN_PROGRESS,
-        SUCCESS,
-        FAILURE
+        UP,
+        DOWN,
+        UNKNOWN
     }
 }

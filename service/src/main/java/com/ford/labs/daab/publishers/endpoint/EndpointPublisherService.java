@@ -16,7 +16,7 @@
 
 package com.ford.labs.daab.publishers.endpoint;
 
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.Event;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import com.ford.labs.daab.publishers.endpoint.exception.EventAlreadyRegisteredException;
 import com.ford.labs.daab.publishers.endpoint.exception.EventNotRegisteredException;
@@ -46,7 +46,7 @@ public class EndpointPublisherService {
         return isEventRegistered(event.getId())
                 .doOnSuccess(isPresent -> {
                     if (!isPresent) {
-                        log.warn(String.format("Event [%s] has been published without registration. ", event.getId()));
+                        log.warn(String.format("com.ford.labs.daab.event.Event [%s] has been published without registration. ", event.getId()));
                     }
                 })
                 .flatMap(isPresent -> isPresent
@@ -69,7 +69,7 @@ public class EndpointPublisherService {
         return isEventRegistered(id)
                 .doOnSuccess(isPresent -> {
                     if (!isPresent) {
-                        log.warn(String.format("Event [%s] has been deleted without registration. ", id));
+                        log.warn(String.format("com.ford.labs.daab.event.Event [%s] has been deleted without registration. ", id));
                     }
                 })
                 .flatMap(isPresent -> isPresent

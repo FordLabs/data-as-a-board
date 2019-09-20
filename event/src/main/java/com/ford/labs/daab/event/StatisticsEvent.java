@@ -14,16 +14,27 @@
  *
  */
 
-package com.ford.labs.daab.model.event;
-
+package com.ford.labs.daab.event;import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class PercentageEvent extends Event {
-    Double value;
+public class StatisticsEvent extends Event {
+    List<Statistic> statistics = new ArrayList<>();
 
     @Override
-    public String getEventType() { return EventType.PERCENTAGE; }
+    public String getEventType() {
+        return EventType.STATISTICS;
+    }
+
+    @Data @NoArgsConstructor @AllArgsConstructor
+    public static class Statistic {
+        String name;
+        String value;
+    }
 }

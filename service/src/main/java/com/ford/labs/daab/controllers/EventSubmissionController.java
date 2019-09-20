@@ -16,7 +16,7 @@
 
 package com.ford.labs.daab.controllers;
 
-import com.ford.labs.daab.model.event.Event;
+import com.ford.labs.daab.event.Event;
 import org.springframework.data.redis.connection.ReactiveSubscription;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.http.MediaType;
