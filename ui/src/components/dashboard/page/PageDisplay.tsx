@@ -16,13 +16,13 @@
 
 import React from "react";
 
-import EventWrapper from "../eventdisplay/EventWrapper";
+import {Tile} from "../tile/Tile";
 
 import styles from "./Page.module.css";
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
+import {TileProperties} from '../../../model/TileProperties';
 
 interface Props {
-    pageEvents: EventDisplayProperties[];
+    tiles: TileProperties[];
     name: string;
     rows?: number;
     columns?: number;
@@ -39,10 +39,10 @@ export function PageDisplay(props: Props) {
     return <div className={styles.radiatorPage}>
         <div className={styles.pageName}>{props.name}</div>
         <div className={styles.radiatorPageInner} style={gridStyle(props.rows, props.columns)}>
-            {props.pageEvents.map((item, index) =>
-                <EventWrapper
+            {props.tiles.map((tile, index) =>
+                <Tile
                     key={index}
-                    eventDisplay={item}
+                    tile={tile}
                 />
             )}
         </div>

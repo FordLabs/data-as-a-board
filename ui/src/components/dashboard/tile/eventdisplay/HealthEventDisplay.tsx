@@ -15,21 +15,19 @@
  */
 
 import React from "react";
-
-import {JobEvent} from "../../../model/JobEvent";
-import Icon from "../../icon/Icon";
-import {HealthEvent} from "../../../model/HealthEvent";
+import {HealthEvent} from "../../../../model/HealthEvent";
+import Icon from "../../../icon/Icon";
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from "../../../../model/EventDisplayProperties";
 
 export interface Props {
-    event: JobEvent
+    event: HealthEvent
     display: EventDisplayProperties
 }
 
-export function JobEventDisplay(props: Props) {
-    return <EventDisplay event={props.event} display={props.display}>
+export function HealthEventDisplay(props: Props) {
+    return <EventDisplay event={props.event} display={props.display} timePrefix={"since"}>
         <div className={styles.figureWithLabel}>
             {icon(props.event)}
             <span>{displayStatus(props.event)}</span>
@@ -39,16 +37,10 @@ export function JobEventDisplay(props: Props) {
 
 function icon(event: HealthEvent) {
     switch (event.status) {
-        case "SUCCESS":
+        case "UP":
             return Icon.ok;
-        case "IN_PROGRESS":
-            return Icon.inProgress;
-        case "UNSTABLE":
-            return Icon.unstable;
-        case "FAILURE":
+        case "DOWN":
             return Icon.warn;
-        case "DISABLED":
-            return Icon.disabled;
         default:
             return Icon.unknown;
     }
@@ -56,16 +48,10 @@ function icon(event: HealthEvent) {
 
 function displayStatus(event: HealthEvent): string {
     switch (event.status) {
-        case "SUCCESS":
-            return "Success";
-        case "IN_PROGRESS":
-            return "In Progress";
-        case "UNSTABLE":
-            return "Unstable";
-        case "FAILURE":
-            return "Failure";
-        case "DISABLED":
-            return "Disabled";
+        case "UP":
+            return "Up";
+        case "DOWN":
+            return "Down";
         default:
             return "Unknown";
     }

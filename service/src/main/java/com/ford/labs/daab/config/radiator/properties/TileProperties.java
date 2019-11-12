@@ -16,17 +16,24 @@
 
 package com.ford.labs.daab.config.radiator.properties;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class EventDisplayProperties extends TileProperties {
-    String id;
-    Boolean fill = null;
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "tileType", defaultImpl = EventDisplayProperties.class)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = EventDisplayProperties.class, name = TileType.EVENT)
+})
+public class TileProperties {
+    Integer row = null,
+            column = null,
+            width = null,
+            height = null;
 
-    @Override
-    public String getTileType() {
-        return TileType.EVENT;
-    }
+    String tileType;
 }

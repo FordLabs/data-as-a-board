@@ -16,7 +16,7 @@
 
 import moment from "moment";
 import React, {useState} from "react";
-import {useInterval} from "../../../hooks/useInterval";
+import {useInterval} from "../../../../hooks/useInterval";
 
 interface Props {
     time?: string;

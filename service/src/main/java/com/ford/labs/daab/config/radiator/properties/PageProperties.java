@@ -24,7 +24,7 @@ import java.util.List;
 
 @Getter @Setter
 public class PageProperties {
-    List<EventDisplayProperties> events = new ArrayList<>();
+    List<EventDisplayProperties> tiles = new ArrayList<>();
     String name;
     Integer rows = null;
     Integer columns = null;

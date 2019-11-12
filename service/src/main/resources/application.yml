@@ -23,10 +23,10 @@
         [
         {
           "name": "",
-          "events":
+          "tiles":
             [
-            { "id": "weather.dearborn", "row": 0, "column": 1 },
-            { "id": "quote.upwise", "row": 0, "column": 2, "width": 1 }
+            { "id": "weather.dearborn", "row": 0, "column": 1, "tileType": "EVENT" },
+            { "id": "quote.upwise", "row": 0, "column": 2, "width": 1, "tileType": "EVENT" }
             ],
           "rows": 3,
           "columns": 5,

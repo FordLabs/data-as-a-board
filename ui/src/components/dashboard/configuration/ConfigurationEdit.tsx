@@ -38,7 +38,7 @@ function ConfigurationEdit(props: Props) {
     return <animated.div className={styles.container} style={transition}>
         <ConfigurationForm/>
         <datalist id="events">
-            {props.eventIds.map(id => <option value={id}/>)}
+            {props.eventIds.map(id => <option value={id} key={id}/>)}
         </datalist>
     </animated.div>;
 }

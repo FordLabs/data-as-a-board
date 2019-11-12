@@ -36,6 +36,7 @@ import {Configuration} from '../../../model/Configuration';
 import {rootReducer} from '../../../store';
 import {ApplicationState} from '../../../store/ApplicationState';
 import ConfigurationEdit from './ConfigurationEdit';
+import {EventDisplayProperties} from '../../../model/EventDisplayProperties';
 
 describe('ConfigurationEdit', () => {
     afterEach(cleanup);
@@ -130,7 +131,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -142,13 +143,13 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -170,13 +171,13 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -188,7 +189,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -210,7 +211,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: 'yadoT',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -222,7 +223,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: 'Today',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -247,7 +248,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -259,7 +260,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 6,
                 },
@@ -284,7 +285,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -296,7 +297,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 4,
                 },
@@ -321,7 +322,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -333,7 +334,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 4,
                     columns: 5,
                 },
@@ -358,7 +359,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -370,7 +371,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 2,
                     columns: 5,
                 },
@@ -395,7 +396,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -407,7 +408,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 2,
                     columns: 5,
                 },
@@ -433,7 +434,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -445,11 +446,12 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [{
+                    tiles: [{
                         id: 'new.event',
                         row: 1,
                         column: 1,
-                    }],
+                        tileType: "EVENT"
+                    } as EventDisplayProperties],
                     rows: 3,
                     columns: 5,
                 },
@@ -485,9 +487,10 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [{
+                    tiles: [{
                         id: 'job.jenkins.daab',
-                    }],
+                        tileType: "EVENT",
+                    } as EventDisplayProperties],
                     rows: 3,
                     columns: 5,
                 },
@@ -499,7 +502,7 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [],
+                    tiles: [],
                     rows: 3,
                     columns: 5,
                 },
@@ -509,7 +512,7 @@ describe('ConfigurationEdit', () => {
         await testConfigurationChange(input, expected, async (component) => {
             const editPages = component.getByTestId('edit-pages');
             const pageToEdit = getByTestId(editPages, 'edit-page-0');
-            const eventToEdit = getByTestId(pageToEdit, 'edit-page-0-event-job.jenkins.daab');
+            const eventToEdit = getByTestId(pageToEdit, 'edit-page-0-tile-0');
             const deleteButton = getByLabelText(eventToEdit, 'Delete Event');
 
             act(() => {
@@ -524,11 +527,12 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [{
+                    tiles: [{
                         id: 'job.jenkins.daab',
                         width: 1,
                         height: 1,
-                    }],
+                        tileType: "EVENT",
+                    } as EventDisplayProperties],
                     rows: 3,
                     columns: 5,
                 },
@@ -540,11 +544,12 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [{
+                    tiles: [{
                         id: 'job.jenkins.daab',
                         width: 2,
                         height: 2,
-                    }],
+                        tileType: "EVENT",
+                    } as EventDisplayProperties],
                     rows: 3,
                     columns: 5,
                 },
@@ -554,7 +559,7 @@ describe('ConfigurationEdit', () => {
         await testConfigurationChange(input, expected, async (component) => {
             const editPages = component.getByTestId('edit-pages');
             const pageToEdit = getByTestId(editPages, 'edit-page-0');
-            const eventToEdit = getByTestId(pageToEdit, 'edit-page-0-event-job.jenkins.daab');
+            const eventToEdit = getByTestId(pageToEdit, 'edit-page-0-tile-0');
             const widthInput = getByLabelText(eventToEdit, 'width');
             const heightInput = getByLabelText(eventToEdit, 'height');
 
@@ -575,13 +580,13 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [{
+                    tiles: [{
                         id: 'job.jenkins.daab',
                         width: 1,
                         height: 1,
                         row: 0,
                         column: 0,
-                    }],
+                    } as EventDisplayProperties],
                     rows: 3,
                     columns: 5,
                 },
@@ -593,13 +598,13 @@ describe('ConfigurationEdit', () => {
             pages: [
                 {
                     name: '',
-                    events: [{
+                    tiles: [{
                         id: 'job.jenkins.daab',
                         width: 1,
                         height: 1,
                         row: 1,
                         column: 3,
-                    }],
+                    } as EventDisplayProperties],
                     rows: 3,
                     columns: 5,
                 },
