@@ -14,8 +14,8 @@
  *
  */
 
-import {Configuration} from "../../model/Configuration";
-import {EventMap} from "../../model/EventMap";
+import {Configuration} from 'model/Configuration';
+import {EventMap} from 'model/EventMap';
 
 export interface DashboardState {
     readonly configuration: Configuration;

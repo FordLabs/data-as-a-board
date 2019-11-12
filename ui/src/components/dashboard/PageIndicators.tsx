@@ -17,8 +17,8 @@
 import React from "react";
 import styles from "./Dashboard.module.css";
 import {PageIndicator} from "./PageIndicator";
-import {ApplicationState} from "../../store/ApplicationState";
-import {gotoPage} from "../../store/dashboard/actions";
+import {ApplicationState} from 'store/ApplicationState';
+import {gotoPage} from 'store/dashboard/actions';
 import {connect} from "react-redux";
 
 interface Props {

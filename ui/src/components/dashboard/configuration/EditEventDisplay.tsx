@@ -16,11 +16,11 @@
 
 import React from "react";
 
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 import Icon from "../../icon/Icon";
 import style from "./Configuration.module.css";
 import Input from "./Input";
-import {TileProperties} from '../../../model/TileProperties';
+import {TileProperties} from 'model/TileProperties';
 
 interface Props {
     display: EventDisplayProperties;

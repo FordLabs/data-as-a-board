@@ -16,7 +16,7 @@
 
 import {action} from "typesafe-actions";
 import {Event} from "../../model/Event";
-import {Configuration} from "../../model/Configuration";
+import {Configuration} from 'model/Configuration';
 
 export enum ActionTypes {
     GOTO_PAGE = "@@dashboard/GOTO_PAGE",

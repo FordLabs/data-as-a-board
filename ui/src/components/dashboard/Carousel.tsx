@@ -16,10 +16,10 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import {useInterval} from "../../hooks/useInterval";
-import {Page} from "../../model/Page";
-import {ApplicationState} from "../../store/ApplicationState";
-import {incrementPage} from "../../store/dashboard/actions";
+import {useInterval} from 'hooks/useInterval';
+import {Page} from 'model/Page';
+import {ApplicationState} from 'store/ApplicationState';
+import {incrementPage} from 'store/dashboard/actions';
 import styles from "./Dashboard.module.css";
 import {PageDisplay} from "./page/PageDisplay";
 

@@ -16,9 +16,9 @@
 
 import React from "react";
 
-import {Event, Level} from "../../../../model/Event";
+import {Event, Level} from 'model/Event';
 
-import {EventDisplayProperties} from "../../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 import styles from "./EventDisplay.module.css";
 import {TimestampDisplay} from "./TimestampDifference";
 

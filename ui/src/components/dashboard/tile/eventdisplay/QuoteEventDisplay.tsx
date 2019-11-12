@@ -14,11 +14,11 @@
  *
  */
 
-import {QuoteEvent} from "../../../../model/QuoteEvent";
+import {QuoteEvent} from 'model/QuoteEvent';
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
 import React from "react";
-import {EventDisplayProperties} from "../../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 
 interface Props {
     event: QuoteEvent;

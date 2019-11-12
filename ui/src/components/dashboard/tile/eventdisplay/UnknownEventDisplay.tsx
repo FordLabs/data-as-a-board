@@ -16,9 +16,9 @@
 
 import React from "react";
 
-import {Event} from "../../../../model/Event";
+import {Event} from 'model/Event';
 
-import {EventDisplayProperties} from "../../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
 

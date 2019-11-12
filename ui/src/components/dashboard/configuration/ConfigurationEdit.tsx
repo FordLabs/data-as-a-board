@@ -18,7 +18,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {animated, useSpring} from "react-spring";
 
-import {ApplicationState} from "../../../store/ApplicationState";
+import {ApplicationState} from 'store/ApplicationState';
 
 import styles from "./Configuration.module.css";
 import ConfigurationForm from "./ConfigurationForm";

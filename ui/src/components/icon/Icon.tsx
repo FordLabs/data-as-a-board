@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import {IconType} from "../../model/IconType";
+import {IconType} from 'model/IconType';
 import styles from "./Icon.module.css";
 
 function MDI(icon: IconType) {

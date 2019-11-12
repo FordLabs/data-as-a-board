@@ -18,7 +18,7 @@ import React, {useState} from 'react';
 import style from './Configuration.module.css';
 import Icon from '../../icon/Icon';
 import Input from './Input';
-import {TileProperties} from '../../../model/TileProperties';
+import {TileProperties} from 'model/TileProperties';
 import Select from './Select';
 
 interface Props {

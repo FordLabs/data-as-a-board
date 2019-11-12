@@ -18,17 +18,17 @@ import React, {useReducer} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
-import {ApplicationState} from '../../../store/ApplicationState';
-import {Configuration} from '../../../model/Configuration';
-import {dismissEdit, loadConfiguration} from '../../../store/dashboard/actions';
+import {ApplicationState} from 'store/ApplicationState';
+import {Configuration} from 'model/Configuration';
+import {dismissEdit, loadConfiguration} from 'store/dashboard/actions';
 
 import Icon from '../../icon/Icon';
 import Input from './Input';
 
 import style from './Configuration.module.css';
 import {EditPage} from './EditPage';
-import {Page} from '../../../model/Page';
-import {TileProperties} from '../../../model/TileProperties';
+import {Page} from 'model/Page';
+import {TileProperties} from 'model/TileProperties';
 
 interface Props {
     configuration: Configuration;

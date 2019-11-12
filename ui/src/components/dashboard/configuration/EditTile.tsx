@@ -17,11 +17,11 @@
  *
  */
 
-import {TileProperties} from '../../../model/TileProperties';
+import {TileProperties} from 'model/TileProperties';
 import React, {ReactNode} from 'react';
 import style from './Configuration.module.css';
-import {EditEventDisplay} from '../../../components/dashboard/configuration/EditEventDisplay';
-import {EventDisplayProperties} from '../../../model/EventDisplayProperties';
+import {EditEventDisplay} from 'components/dashboard/configuration/EditEventDisplay';
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 
 interface Props {
     tile: TileProperties;

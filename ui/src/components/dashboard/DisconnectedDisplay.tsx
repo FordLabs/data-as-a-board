@@ -18,7 +18,7 @@ import React from "react";
 import Icon from "../icon/Icon";
 import styles from "./Dashboard.module.css";
 import {connect} from "react-redux";
-import {ApplicationState} from "../../store/ApplicationState";
+import {ApplicationState} from 'store/ApplicationState';
 
 interface Props {
     isDisconnected: boolean;

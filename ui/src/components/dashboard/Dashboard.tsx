@@ -17,7 +17,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import {ApplicationState} from "../../store/ApplicationState";
+import {ApplicationState} from 'store/ApplicationState';
 
 import Carousel from "./Carousel";
 import ConfigurationEdit from "./configuration/ConfigurationEdit";
