@@ -14,11 +14,12 @@
  *
  */
 
-import React, {useState} from "react";
-import style from "./Configuration.module.css";
-import Icon from "../../icon/Icon";
-import Input from "./Input";
+import React, {useState} from 'react';
+import style from './Configuration.module.css';
+import Icon from '../../icon/Icon';
+import Input from './Input';
 import {TileProperties} from '../../../model/TileProperties';
+import Select from './Select';
 
 interface Props {
     row: number;
@@ -30,17 +31,21 @@ interface Props {
     onTileDropped(pageFrom: number, pageTo: number, tile: TileProperties, newRow: number, newCol: number): void;
 }
 
+enum AddType {
+    EVENT = 'EVENT'
+}
+
 export function EmptySpot(props: Props) {
     const {row, column} = props;
 
     const [isHovered, setHovered] = useState(false);
-    const [isAdding, setAdding] = useState(false);
-    const [newEventId, setNewEventId] = useState("");
+    const [adding, setAdding] = useState<AddType | undefined>(undefined);
+    const [newEventId, setNewEventId] = useState('');
 
     const className = [
         style.editBoardPageEmptySpot,
         isHovered ? style.hover : null,
-    ].filter((c) => c).join(" ");
+    ].filter((c) => c).join(' ');
 
     function onDragOver(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
@@ -59,8 +64,8 @@ export function EmptySpot(props: Props) {
     function onDrop(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
         setHovered(false);
-        const tile = JSON.parse(event.dataTransfer.getData("tile") || "null");
-        const pageFrom = parseInt(event.dataTransfer.getData("page"), 10);
+        const tile = JSON.parse(event.dataTransfer.getData('tile') || 'null');
+        const pageFrom = parseInt(event.dataTransfer.getData('page'), 10);
 
         if (tile !== null && !isNaN(pageFrom)) {
             props.onTileDropped(pageFrom, props.pageNumber, tile, props.row, props.column);
@@ -68,13 +73,13 @@ export function EmptySpot(props: Props) {
     }
 
     function onNewEvent(event: React.MouseEvent<HTMLButtonElement>) {
-        setAdding(false);
+        setAdding(undefined);
         props.onEventAdded(newEventId, props.row, props.column);
         event.preventDefault();
     }
 
     function onCancelNewEvent(event: React.MouseEvent<HTMLButtonElement>) {
-        setAdding(false);
+        setAdding(undefined);
         event.preventDefault();
     }
 
@@ -82,28 +87,47 @@ export function EmptySpot(props: Props) {
         style={{gridColumnStart: column + 1, gridRowStart: row + 1}}
         className={className}
         data-testid={`edit-page-${props.pageNumber}-empty-spot-${props.row},${props.column}`}
-        onClick={() => {
-            if (!isAdding) {
-                setAdding(true);
-            }
-        }}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
     >
         {isHovered && Icon.ok}
-        {isAdding && <div className={style.addEventForm}>
-            <Input label="Event ID" list="events" value={newEventId}
-                   onChange={(event) => setNewEventId(event.target.value)}/>
-            <div className={style.addEventButtons}>
-                <button aria-label={"Cancel New Event"}
-                        className={style.addRemoveButton}
-                        onClick={onCancelNewEvent}>{Icon.disabled}</button>
-                <button aria-label={"Add Event"}
-                        className={style.addRemoveButton}
-                        onClick={onNewEvent}>{Icon.ok}</button>
-            </div>
-        </div>}
-        {!isAdding && <div className={style.addEvent}>{Icon.add}</div>}
+        {
+            adding
+                ? <div className={style.addEventForm}>
+                    <Input
+                        label="Event ID"
+                        list="events"
+                        value={newEventId}
+                        onChange={(event) => setNewEventId(event.target.value)}
+                    />
+                    <div className={style.addEventButtons}>
+                        <button
+                            aria-label={'Cancel New Event'}
+                            className={style.addRemoveButton}
+                            onClick={onCancelNewEvent}
+                        >
+                            {Icon.disabled}
+                        </button>
+                        <button
+                            aria-label={'Add Event'}
+                            className={style.addRemoveButton}
+                            onClick={onNewEvent}
+                        >
+                            {Icon.ok}
+                        </button>
+                    </div>
+                </div>
+                : <div className={style.addTile}>
+                    <Select
+                        value={adding}
+                        label={"Add new:"}
+                        onChange={(event) => setAdding(event.target.value as (AddType | undefined))}
+                    >
+                        <option value={undefined}>--</option>
+                        <option value={AddType.EVENT}>Event</option>
+                </Select>
+                </div>
+        }
     </div>;
 }
