@@ -16,7 +16,7 @@
 
 import moment from "moment";
 import React, {useState} from "react";
-import {useInterval} from "../../../hooks/useInterval";
+import {useInterval} from 'hooks/useInterval';
 
 export function TimeDisplay() {
     const [time, setTime] = useState(moment());

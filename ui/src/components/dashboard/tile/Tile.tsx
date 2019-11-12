@@ -19,9 +19,9 @@
 
 import React from 'react';
 
-import {TileProperties} from '../../../model/TileProperties';
+import {TileProperties} from 'model/TileProperties';
 
-import {EventDisplayProperties} from '../../../model/EventDisplayProperties';
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 import EventWrapper from './eventdisplay/EventWrapper';
 
 interface Props {

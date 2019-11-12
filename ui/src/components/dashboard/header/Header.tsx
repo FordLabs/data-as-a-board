@@ -18,8 +18,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {useSpring, animated} from "react-spring";
 
-import {ApplicationState} from "../../../store/ApplicationState";
-import {edit, dismissEdit} from "../../../store/dashboard/actions";
+import {ApplicationState} from 'store/ApplicationState';
+import {edit, dismissEdit} from 'store/dashboard/actions';
 import {TimeDisplay} from "./TimeDisplay";
 
 import styles from "./Header.module.css";

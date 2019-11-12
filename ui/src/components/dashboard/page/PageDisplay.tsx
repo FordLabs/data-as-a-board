@@ -19,7 +19,7 @@ import React from "react";
 import {Tile} from "../tile/Tile";
 
 import styles from "./Page.module.css";
-import {TileProperties} from '../../../model/TileProperties';
+import {TileProperties} from 'model/TileProperties';
 
 interface Props {
     tiles: TileProperties[];

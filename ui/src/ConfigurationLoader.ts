@@ -15,8 +15,8 @@
  */
 
 import {Store} from "redux";
-import {ApplicationState} from "./store/ApplicationState";
-import {loadConfiguration} from "./store/dashboard/actions";
+import {ApplicationState} from 'store/ApplicationState';
+import {loadConfiguration} from 'store/dashboard/actions';
 
 export default class ConfigurationLoader {
     private readonly store: Store<ApplicationState>;

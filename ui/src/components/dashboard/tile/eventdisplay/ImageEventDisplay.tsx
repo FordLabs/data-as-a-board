@@ -18,8 +18,8 @@ import * as React from "react";
 
 import {EventDisplay} from "./EventDisplay";
 
-import {EventDisplayProperties} from "../../../../model/EventDisplayProperties";
-import {ImageEvent} from "../../../../model/ImageEvent";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
+import {ImageEvent} from 'model/ImageEvent';
 
 import styles from "./ImageEventDisplay.module.css";
 

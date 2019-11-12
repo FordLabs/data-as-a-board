@@ -32,11 +32,11 @@ import {
     wait,
 } from '@testing-library/react';
 
-import {Configuration} from '../../../model/Configuration';
-import {rootReducer} from '../../../store';
-import {ApplicationState} from '../../../store/ApplicationState';
+import {Configuration} from 'model/Configuration';
+import {rootReducer} from 'store/index';
+import {ApplicationState} from 'store/ApplicationState';
 import ConfigurationEdit from './ConfigurationEdit';
-import {EventDisplayProperties} from '../../../model/EventDisplayProperties';
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 
 describe('ConfigurationEdit', () => {
     afterEach(cleanup);
