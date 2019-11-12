@@ -467,6 +467,12 @@ describe('ConfigurationEdit', () => {
                 fireEvent.click(emptySpotToAddTo);
             });
 
+            const emptySpotTypeSelect = getByLabelText(emptySpotToAddTo, 'Add new:');
+
+            act(() => {
+                fireEvent.change(emptySpotTypeSelect, {target: {value: 'EVENT'}});
+            });
+
             const eventIdInput = getByLabelText(emptySpotToAddTo, 'Event ID');
 
             act(() => {

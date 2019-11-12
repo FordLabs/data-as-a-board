@@ -142,12 +142,16 @@
     background-color: #383838;
 }
 
-.editBoardPageEmptySpot > .addEvent {
+.editBoardPageEmptySpot > .addTile {
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }
 
-.editBoardPageEmptySpot:hover > .addEvent {
+.editBoardPageEmptySpot:hover > .addTile {
     opacity: 1;
 }
 
