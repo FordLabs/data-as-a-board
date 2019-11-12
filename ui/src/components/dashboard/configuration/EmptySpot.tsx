@@ -18,6 +18,7 @@ import React, {useState} from "react";
 import style from "./Configuration.module.css";
 import Icon from "../../icon/Icon";
 import Input from "./Input";
+import {TileProperties} from '../../../model/TileProperties';
 
 interface Props {
     row: number;
@@ -26,7 +27,7 @@ interface Props {
 
     onEventAdded(eventId: string, row: number, column: number): void;
 
-    onEventDropped(pageFrom: number, pageTo: number, eventId: string, newRow: number, newCol: number): void;
+    onTileDropped(pageFrom: number, pageTo: number, tile: TileProperties, newRow: number, newCol: number): void;
 }
 
 export function EmptySpot(props: Props) {
@@ -58,11 +59,11 @@ export function EmptySpot(props: Props) {
     function onDrop(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
         setHovered(false);
-        const eventId = event.dataTransfer.getData("eventId");
+        const tile = JSON.parse(event.dataTransfer.getData("tile") || "null");
         const pageFrom = parseInt(event.dataTransfer.getData("page"), 10);
 
-        if (eventId !== undefined && !isNaN(pageFrom)) {
-            props.onEventDropped(pageFrom, props.pageNumber, eventId, props.row, props.column);
+        if (tile !== null && !isNaN(pageFrom)) {
+            props.onTileDropped(pageFrom, props.pageNumber, tile, props.row, props.column);
         }
     }
 

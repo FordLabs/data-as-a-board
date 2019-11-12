@@ -14,16 +14,16 @@
  *
  */
 
-import React, {useState} from "react";
-import {Page} from "../../../model/Page";
+import React from 'react';
+import {Page} from '../../../model/Page';
 
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
-import Icon from "../../icon/Icon";
-import style from "./Configuration.module.css";
-import Input from "./Input";
-import {EmptySpot} from "./EmptySpot";
-import {EditEventDisplay} from "./EditEventDisplay";
-import {act} from "@testing-library/react";
+import Icon from '../../icon/Icon';
+import style from './Configuration.module.css';
+import Input from './Input';
+import {EmptySpot} from './EmptySpot';
+import {TileProperties} from '../../../model/TileProperties';
+import {EditTile} from './EditTile';
+import {EventDisplayProperties} from '../../../model/EventDisplayProperties';
 
 interface Props {
     page: Page;
@@ -32,7 +32,7 @@ interface Props {
 
     onPageChanged(page: Page): void;
 
-    onEventMovedToNewPage(pageFrom: number, pageTo: number, eventId: string, newRow: number, newCol: number): void;
+    onTileMovedToNewPage(pageFrom: number, pageTo: number, tile: TileProperties, newRow: number, newCol: number): void;
 }
 
 enum ActionType {
@@ -41,9 +41,9 @@ enum ActionType {
     REMOVE_COLUMN,
     ADD_ROW,
     REMOVE_ROW,
-    CHANGE_EVENT_DIMENSIONS,
-    ADD_EVENT,
-    DELETE_EVENT,
+    CHANGE_TILE_DIMENSIONS,
+    ADD_EVENT_TILE,
+    DELETE_TILE,
 }
 
 type Action =
@@ -52,9 +52,13 @@ type Action =
     | { type: ActionType.REMOVE_COLUMN }
     | { type: ActionType.ADD_ROW }
     | { type: ActionType.REMOVE_ROW }
-    | { type: ActionType.CHANGE_EVENT_DIMENSIONS, eventId: string, width?: number, height?: number }
-    | { type: ActionType.ADD_EVENT, eventId: string, row: number, column: number }
-    | { type: ActionType.DELETE_EVENT, eventId: string };
+    | { type: ActionType.CHANGE_TILE_DIMENSIONS, tile: TileProperties, width?: number, height?: number }
+    | { type: ActionType.ADD_EVENT_TILE, eventId: string, row: number, column: number }
+    | { type: ActionType.DELETE_TILE, tile: TileProperties };
+
+function tilesAreSame(tile1: TileProperties, tile2: TileProperties) {
+    return tile1.column === tile2.column && tile1.row === tile2.row;
+}
 
 function reducer(state: Page, action: Action): Page {
     switch (action.type) {
@@ -68,28 +72,30 @@ function reducer(state: Page, action: Action): Page {
             return Object.assign({}, state, {rows: (state.rows || 3) + 1});
         case ActionType.REMOVE_ROW:
             return Object.assign({}, state, {rows: (state.rows || 3) - 1});
-        case ActionType.CHANGE_EVENT_DIMENSIONS:
-            const eventsWithNewDimensions = state.events.slice(0);
+        case ActionType.CHANGE_TILE_DIMENSIONS:
+            const tileWithNewDimensions = state.tiles.slice(0);
 
-            const eventIndex = eventsWithNewDimensions.findIndex((event) => event.id === action.eventId);
+            const tileIndex = tileWithNewDimensions.findIndex((tile) => tilesAreSame(tile, action.tile));
 
-            eventsWithNewDimensions[eventIndex] = Object.assign({}, eventsWithNewDimensions[eventIndex], {
-                width: action.width || eventsWithNewDimensions[eventIndex].width,
-                height: action.height || eventsWithNewDimensions[eventIndex].height,
+            tileWithNewDimensions[tileIndex] = Object.assign({}, tileWithNewDimensions[tileIndex], {
+                width: action.width || tileWithNewDimensions[tileIndex].width,
+                height: action.height || tileWithNewDimensions[tileIndex].height,
             });
 
-            return Object.assign({}, state, {events: eventsWithNewDimensions});
-        case ActionType.ADD_EVENT:
-            const eventsWithNewEvent = state.events.slice(0);
-            eventsWithNewEvent.push({
+            return Object.assign({}, state, {tiles: tileWithNewDimensions});
+        case ActionType.ADD_EVENT_TILE:
+            const tilesWithNewTile = state.tiles.slice(0);
+            let newEventDisplayProperties: EventDisplayProperties = {
                 id: action.eventId,
                 row: action.row,
                 column: action.column,
-            });
+                tileType: 'EVENT',
+            };
+            tilesWithNewTile.push(newEventDisplayProperties);
 
-            return Object.assign({}, state, {events: eventsWithNewEvent});
-        case ActionType.DELETE_EVENT:
-            return Object.assign({}, state, {events: state.events.filter((event) => event.id !== action.eventId)});
+            return Object.assign({}, state, {tiles: tilesWithNewTile});
+        case ActionType.DELETE_TILE:
+            return Object.assign({}, state, {tiles: state.tiles.filter((tile) => !tilesAreSame(tile, action.tile))});
     }
 }
 
@@ -99,16 +105,27 @@ export function EditPage(props: Props) {
         props.onPageChanged(reducer(props.page, action));
     }
 
-    const setName = (name: string) => dispatch({type: ActionType.SET_NAME, name});
+    const setName = (name: string) => dispatch({
+        type: ActionType.SET_NAME,
+        name
+    });
     const addColumn = () => dispatch({type: ActionType.ADD_COLUMN});
     const removeColumn = () => dispatch({type: ActionType.REMOVE_COLUMN});
     const addRow = () => dispatch({type: ActionType.ADD_ROW});
     const removeRow = () => dispatch({type: ActionType.REMOVE_ROW});
-    const addEvent = (eventId: string, row: number, column: number) =>
-        dispatch({type: ActionType.ADD_EVENT, eventId, row, column});
-    const deleteEvent = (eventId: string) => dispatch({type: ActionType.DELETE_EVENT, eventId});
-    const changeEventDimensions = (eventId: string, width?: number, height?: number) =>
-        dispatch({type: ActionType.CHANGE_EVENT_DIMENSIONS, eventId, width, height});
+    const addTile = (eventId: string, row: number, column: number) =>
+        dispatch({type: ActionType.ADD_EVENT_TILE, eventId, row, column});
+    const deleteTile = (tile: TileProperties) => dispatch({
+        type: ActionType.DELETE_TILE,
+        tile
+    });
+    const changeTileDimensions = (tile: TileProperties, width?: number, height?: number) =>
+        dispatch({
+            type: ActionType.CHANGE_TILE_DIMENSIONS,
+            tile,
+            width,
+            height
+        });
 
     return <div className={style.editBoardPage}
                 data-testid={`edit-page-${props.pageNumber}`}
@@ -117,13 +134,14 @@ export function EditPage(props: Props) {
                     height: window.innerHeight * .6,
                 }}>
         <div className={style.editBoardPageName}>
-            <Input label="Page Name" value={props.page.name} onChange={(event) => setName(event.target.value)}/>
+            <Input label="Page Name" value={props.page.name}
+                   onChange={(event) => setName(event.target.value)}/>
         </div>
         <div
             className={style.editBoardPageGrid}
             style={{
-                gridTemplateRows: "1fr ".repeat(props.page.rows || 3),
-                gridTemplateColumns: "1fr ".repeat(props.page.columns || 5),
+                gridTemplateRows: '1fr '.repeat(props.page.rows || 3),
+                gridTemplateColumns: '1fr '.repeat(props.page.columns || 5),
             }}
         >
             {
@@ -133,35 +151,41 @@ export function EditPage(props: Props) {
                                    row={row}
                                    column={column}
                                    pageNumber={props.pageNumber}
-                                   onEventAdded={addEvent}
-                                   onEventDropped={props.onEventMovedToNewPage}/>,
+                                   onEventAdded={addTile}
+                                   onTileDropped={props.onTileMovedToNewPage}/>,
                     ),
                 )
             }
             {
-                props.page.events.map((display) =>
-                    <EditEventDisplay key={display.id}
-                                      rows={props.page.rows || 3}
-                                      columns={props.page.columns || 5}
-                                      display={display}
-                                      onEventDeleted={deleteEvent}
-                                      pageNumber={props.pageNumber}
-                                      onChangeDimensions={changeEventDimensions}
+                props.page.tiles.map((tile, index) =>
+                    <EditTile key={`page-${props.pageNumber}-${index}`}
+                              index={index}
+                              pageNumber={props.pageNumber}
+                              rows={props.page.rows || 3}
+                              columns={props.page.columns || 5}
+                              tile={tile}
+                              onTileDeleted={deleteTile}
+                              onChangeDimensions={changeTileDimensions}
                     />,
                 )
             }
         </div>
         <div className={style.editBoardPageAddRemoveColumn}>
             {props.page.columns! > 1 &&
-            <button type="button" aria-label="Remove Column" className={style.addRemoveButton}
+            <button type="button" aria-label="Remove Column"
+                    className={style.addRemoveButton}
                     onClick={removeColumn}>{Icon.remove}</button>}
-            <button type="button" aria-label="Add Column" className={style.addRemoveButton}
+            <button type="button" aria-label="Add Column"
+                    className={style.addRemoveButton}
                     onClick={addColumn}>{Icon.add}</button>
         </div>
         <div className={style.editBoardPageAddRemoveRow}>
-            {props.page.rows! > 1 && <button type="button" aria-label="Remove Row" className={style.addRemoveButton}
-                                             onClick={removeRow}>{Icon.remove}</button>}
-            <button type="button" aria-label="Add Row" className={style.addRemoveButton}
+            {props.page.rows! > 1 &&
+            <button type="button" aria-label="Remove Row"
+                    className={style.addRemoveButton}
+                    onClick={removeRow}>{Icon.remove}</button>}
+            <button type="button" aria-label="Add Row"
+                    className={style.addRemoveButton}
                     onClick={addRow}>{Icon.add}</button>
         </div>
     </div>;

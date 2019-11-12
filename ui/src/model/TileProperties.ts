@@ -14,19 +14,10 @@
  *
  */
 
-package com.ford.labs.daab.config.radiator.properties;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class EventDisplayProperties extends TileProperties {
-    String id;
-    Boolean fill = null;
-
-    @Override
-    public String getTileType() {
-        return TileType.EVENT;
-    }
+export interface TileProperties {
+    row?: number;
+    column?: number;
+    width?: number;
+    height?: number;
+    tileType: string;
 }

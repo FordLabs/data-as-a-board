@@ -21,7 +21,7 @@ import {animated, useTransition} from "react-spring";
 import {Event, Level} from "../../../model/Event";
 import {ApplicationState} from "../../../store/ApplicationState";
 
-import EventWrapper from "../eventdisplay/EventWrapper";
+import EventWrapper from "../tile/eventdisplay/EventWrapper";
 import styles from "./Notifications.module.css";
 
 function compareLevel(a: Level, b: Level) {

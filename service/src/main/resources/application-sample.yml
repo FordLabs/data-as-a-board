@@ -46,37 +46,46 @@ radiator:
     - name: Today
       rows: 3
       columns: 5
-      events:
+      tiles:
         - id: weather.annarbor
           row: 0
           column: 0
+          tileType: EVENT
         - id: weather.dearborn
           row: 0
           column: 0
+          tileType: EVENT
         - id: quote.hourofpower.fordlabs
           row: 0
           column: 1
+            tileType: EVENT
         - id: health.github
           row: 1
           column: 0
+          tileType: EVENT
         - id: health.pcfpreprod
           row: 1
           column: 1
+          tileType: EVENT
         - id: health.pcfprod
           row: 1
           column: 2
+          tileType: EVENT
         - id: quote.upwise
           row: 2
           column: 0
           width: 3
+          tileType: EVENT
         - id: list.standup.annarbor
           row: 0
           column: 3
           width: 2
           height: 3
+          tileType: EVENT
     - name: Pipeline
       rows: 1
       columns: 4
-      events:
+      tiles:
         - id: list.pipeline
           width: 4
+          tileType: EVENT

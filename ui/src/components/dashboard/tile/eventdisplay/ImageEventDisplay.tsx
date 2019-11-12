@@ -14,30 +14,22 @@
  *
  */
 
-import React from "react";
+import * as React from "react";
 
-import {Statistic, StatisticsEvent} from "../../../model/StatisticsEvent";
 import {EventDisplay} from "./EventDisplay";
 
-import styles from "./EventDisplay.module.css";
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from "../../../../model/EventDisplayProperties";
+import {ImageEvent} from "../../../../model/ImageEvent";
+
+import styles from "./ImageEventDisplay.module.css";
 
 interface Props {
-    event: StatisticsEvent
-    display: EventDisplayProperties
+    event: ImageEvent;
+    display: EventDisplayProperties;
 }
 
-function StatisticDisplay(statistic: Statistic) {
-    return <div className={styles.statistic} key={statistic.name}>
-        {statistic.value} {statistic.name}
-    </div>
-
-}
-
-export function StatisticsEventDisplay(props: Props) {
+export function ImageEventDisplay(props: Props) {
     return <EventDisplay event={props.event} display={props.display}>
-        <div className={styles.statistics}>
-            {props.event.statistics.map(StatisticDisplay)}
-        </div>
-    </EventDisplay>
+        <img className={styles.image} src={props.event.src} alt={props.event.src}/>
+    </EventDisplay>;
 }

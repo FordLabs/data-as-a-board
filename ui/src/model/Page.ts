@@ -14,16 +14,16 @@
  *
  */
 
-import {EventDisplayProperties} from "./EventDisplayProperties";
+import {TileProperties} from "./TileProperties";
 
 export class Page {
-    public events: EventDisplayProperties[];
+    public tiles: TileProperties[];
     public name: string;
     public rows?: number;
     public columns?: number;
 
-    constructor(events = [], name = "", rows = 3, columns = 5) {
-        this.events = events;
+    constructor(tiles = [], name = "", rows = 3, columns = 5) {
+        this.tiles = tiles;
         this.name = name;
         this.rows = rows;
         this.columns = columns;

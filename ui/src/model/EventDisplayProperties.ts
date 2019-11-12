@@ -14,12 +14,10 @@
  *
  */
 
-export interface EventDisplayProperties {
+import {TileProperties} from './TileProperties';
+
+export interface EventDisplayProperties extends TileProperties {
     id: string;
-    row?: number;
-    column?: number;
-    width?: number;
-    height?: number;
     fill?: boolean;
     isNotification?: boolean;
 }

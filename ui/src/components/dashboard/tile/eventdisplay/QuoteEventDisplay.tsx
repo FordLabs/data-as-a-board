@@ -14,22 +14,27 @@
  *
  */
 
-import * as React from "react";
-
+import {QuoteEvent} from "../../../../model/QuoteEvent";
 import {EventDisplay} from "./EventDisplay";
-
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
-import {ImageEvent} from "../../../model/ImageEvent";
-
-import styles from "./ImageEventDisplay.module.css";
+import styles from "./EventDisplay.module.css";
+import React from "react";
+import {EventDisplayProperties} from "../../../../model/EventDisplayProperties";
 
 interface Props {
-    event: ImageEvent;
+    event: QuoteEvent;
     display: EventDisplayProperties;
 }
 
-export function ImageEventDisplay(props: Props) {
+export function QuoteEventDisplay(props: Props) {
+    const quoteDisplayClassName = [styles.quoteDisplay];
+    if (props.display && props.display.width && props.display.width > 1) {
+        quoteDisplayClassName.push(styles["quoteDisplay--wide"]);
+    }
+
     return <EventDisplay event={props.event} display={props.display}>
-        <img className={styles.image} src={props.event.src} alt={props.event.src}/>
+        <div className={quoteDisplayClassName.join(" ")}>
+            <div className={styles.quoteDisplay__quote}>{props.event.quote}</div>
+            {props.event.author && <div className={styles.quoteDisplay__author}>{props.event.author}</div>}
+        </div>
     </EventDisplay>;
 }

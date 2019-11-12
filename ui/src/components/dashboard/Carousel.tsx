@@ -39,7 +39,7 @@ function Carousel(props: Props) {
             <PageDisplay
                 key={index}
                 name={page.name}
-                pageEvents={page.events}
+                tiles={page.tiles}
                 rows={page.rows}
                 columns={page.columns}
             />)
