@@ -35,7 +35,7 @@ Don't see what you're looking for?  DaaB is a generic event publisher, so create
 - Percentage
 - Statistics (list of name/value pairs)
 
-For more details see the [event setup wiki.](https://github.com/FordLabs/data-as-a-board/docs/Event-Types.md)
+For more details see the [event setup wiki.](https://github.com/FordLabs/data-as-a-board/blob/master/docs/Event-Types.md)
 
 ### Configuration
 
@@ -43,7 +43,7 @@ You can tell DaaB which event sources are active and which events are displayed 
 
 Additionally, all credentials necessary to access any APIs will be located here. 
 
-Refer to the [Configuring Events page](https://github.com/FordLabs/data-as-a-board/docs/Configuring-Events.md) for example application.yml files and instructions.
+Refer to the [Configuring Events page](https://github.com/FordLabs/data-as-a-board/blob/master/docs/Configuring-Events.md) for example application.yml files and instructions.
 
 ### Running locally for development
 
