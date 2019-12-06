@@ -56,7 +56,7 @@ Redis is required to run DaaB locally, so ensure you have a Redis instance runni
 
 Once Redis is installed and running you can start DaaB with the Gradle `:bootRun` task. 
 
-This starts both the DaaB service and a development radiator running on ```http://localhost:3000```
+This starts both the DaaB service and a development radiator running on ```http://localhost:8080```
 
 If you would like to run the backend and frontend separately, use the `service:bootRun` and `ui:start` Gradle tasks.
 
