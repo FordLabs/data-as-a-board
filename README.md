@@ -34,9 +34,8 @@ Don't see what you're looking for?  DaaB is a generic event publisher, so create
 - Figure (value, subtext)
 - Percentage
 - Statistics (list of name/value pairs)
-<!-- commented out until wiki is migrated
-For more details see the [event setup wiki.](https://github.ford.com/FordLabs/data-as-a-board/wiki)
--->
+
+For more details see the [event setup wiki.](https://github.com/FordLabs/data-as-a-board/docs/Event-Types.md)
 
 ### Configuration
 
@@ -44,9 +43,7 @@ You can tell DaaB which event sources are active and which events are displayed 
 
 Additionally, all credentials necessary to access any APIs will be located here. 
 
-<!-- commented out until wiki is migrated
-Refer to the [Configuring Events page](https://github.ford.com/FordLabs/data-as-a-board/wiki/Configuring-Events) for example application.yml files and instructions.
--->
+Refer to the [Configuring Events page](https://github.com/FordLabs/data-as-a-board/docs/Configuring-Events.md) for example application.yml files and instructions.
 
 ### Running locally for development
 
@@ -66,5 +63,5 @@ You should use the development UI (running on port 3000) instead of the producti
 ### Building for production
 
 You can build a production jar (that includes the sample radiator application) by running the Gradle `build` task. 
-This will place a jar at `service/build/libs`.
+This will place a `data-as-a-board` jar at `service/build/libs`.  This jar can be deployed to a provider of choice.
 
