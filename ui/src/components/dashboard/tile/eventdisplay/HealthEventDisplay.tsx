@@ -15,11 +15,11 @@
  */
 
 import React from "react";
-import {HealthEvent} from "../../../model/HealthEvent";
-import Icon from "../../icon/Icon";
+import {HealthEvent} from 'model/HealthEvent';
+import Icon from "../../../icon/Icon";
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 
 export interface Props {
     event: HealthEvent

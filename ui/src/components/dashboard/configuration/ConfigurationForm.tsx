@@ -14,20 +14,21 @@
  *
  */
 
-import React, {useReducer} from "react";
-import {connect} from "react-redux";
-import axios from "axios";
+import React, {useReducer} from 'react';
+import {connect} from 'react-redux';
+import axios from 'axios';
 
-import {ApplicationState} from "../../../store/ApplicationState";
-import {Configuration} from "../../../model/Configuration";
-import {dismissEdit, loadConfiguration} from "../../../store/dashboard/actions";
+import {ApplicationState} from 'store/ApplicationState';
+import {Configuration} from 'model/Configuration';
+import {dismissEdit, loadConfiguration} from 'store/dashboard/actions';
 
-import Icon from "../../icon/Icon";
-import Input from "./Input";
+import Icon from '../../icon/Icon';
+import Input from './Input';
 
-import style from "./Configuration.module.css";
-import {EditPage} from "./EditPage";
-import {Page} from "../../../model/Page";
+import style from './Configuration.module.css';
+import {EditPage} from './EditPage';
+import {Page} from 'model/Page';
+import {TileProperties} from 'model/TileProperties';
 
 interface Props {
     configuration: Configuration;
@@ -37,20 +38,22 @@ interface Props {
     onDismiss(): void;
 }
 
+type MoveEventAction = {
+    type: ActionType.MOVE_TILE,
+    pageFrom: number,
+    pageTo: number,
+    tile: TileProperties,
+    newRow: number,
+    newCol: number,
+};
+
 type Action =
     | { type: ActionType.SET_NAME, name: string }
     | { type: ActionType.SET_BACKGROUND, background: string }
     | { type: ActionType.ADD_PAGE }
     | { type: ActionType.REMOVE_PAGE }
     | { type: ActionType.CHANGE_PAGE, page: Page, index: number }
-    | {
-    type: ActionType.MOVE_EVENT,
-    pageFrom: number,
-    pageTo: number,
-    eventId: string,
-    newRow: number,
-    newCol: number,
-};
+    | MoveEventAction;
 
 enum ActionType {
     SET_NAME,
@@ -58,7 +61,7 @@ enum ActionType {
     ADD_PAGE,
     REMOVE_PAGE,
     CHANGE_PAGE,
-    MOVE_EVENT,
+    MOVE_TILE,
 }
 
 function reducer(state: Configuration, action: Action): Configuration {
@@ -78,40 +81,37 @@ function reducer(state: Configuration, action: Action): Configuration {
             const changedPages = state.pages.slice(0);
             changedPages[action.index] = action.page;
             return Object.assign({}, state, {pages: changedPages});
-        case ActionType.MOVE_EVENT:
+        case ActionType.MOVE_TILE:
             return moveEvent(state, action);
         default:
             return state;
     }
 }
 
-function moveEvent(
-    state: Configuration,
-    action: {
-        type: ActionType.MOVE_EVENT,
-        pageFrom: number,
-        pageTo: number,
-        eventId: string,
-        newRow: number,
-        newCol: number,
-    }) {
-    const newPages = state.pages.slice(0);
-    const oldEventPageIndex = newPages[action.pageFrom].events
-        .findIndex((event) => event.id === action.eventId);
+function tilesAreSame(tile1: TileProperties, tile2: TileProperties) {
+    return tile1.column === tile2.column && tile1.row === tile2.row;
+}
 
-    const newEvent = Object.assign(
+function moveEvent(state: Configuration, action: MoveEventAction) {
+    const newPages = state.pages.slice(0);
+    const oldTilePageIndex = newPages[action.pageFrom].tiles
+        .findIndex((tile) => tilesAreSame(tile, action.tile));
+
+    const newTile = Object.assign(
         {},
-        newPages[action.pageFrom].events[oldEventPageIndex], {
+        newPages[action.pageFrom].tiles[oldTilePageIndex],
+        {
             row: action.newRow,
             column: action.newCol,
-        });
+        }
+    );
 
     newPages[action.pageFrom] = Object.assign({}, newPages[action.pageFrom], {
-        events: newPages[action.pageFrom].events.filter((_, idx) => idx !== oldEventPageIndex),
+        tiles: newPages[action.pageFrom].tiles.filter((_, idx) => idx !== oldTilePageIndex),
     });
 
     newPages[action.pageTo] = Object.assign({}, newPages[action.pageTo], {
-        events: newPages[action.pageTo].events.concat([newEvent]),
+        tiles: newPages[action.pageTo].tiles.concat([newTile]),
     });
     return Object.assign({}, state, {pages: newPages});
 }
@@ -119,16 +119,33 @@ function moveEvent(
 function ConfigurationForm(props: Props) {
     const [configuration, dispatch] = useReducer(reducer, props.configuration);
 
-    const setName = (name: string) => dispatch({type: ActionType.SET_NAME, name});
-    const setBackground = (background: string) => dispatch({type: ActionType.SET_BACKGROUND, background});
+    const setName = (name: string) => dispatch({
+        type: ActionType.SET_NAME,
+        name
+    });
+    const setBackground = (background: string) => dispatch({
+        type: ActionType.SET_BACKGROUND,
+        background
+    });
     const addPage = () => dispatch({type: ActionType.ADD_PAGE});
     const removePage = () => dispatch({type: ActionType.REMOVE_PAGE});
-    const changePage = (index: number) => (page: Page) => dispatch({type: ActionType.CHANGE_PAGE, page, index});
-    const moveEventToPage = (pageFrom: number, pageTo: number, eventId: string, newRow: number, newCol: number) =>
-        dispatch({type: ActionType.MOVE_EVENT, pageFrom, pageTo, eventId, newRow, newCol});
+    const changePage = (index: number) => (page: Page) => dispatch({
+        type: ActionType.CHANGE_PAGE,
+        page,
+        index
+    });
+    const moveTileToPage = (pageFrom: number, pageTo: number, tile: TileProperties, newRow: number, newCol: number) =>
+        dispatch({
+            type: ActionType.MOVE_TILE,
+            pageFrom,
+            pageTo,
+            tile,
+            newRow,
+            newCol
+        });
 
     const submit = async () => {
-        await axios.post("/api/radiator/configuration", configuration);
+        await axios.post('/api/radiator/configuration', configuration);
 
         props.onSave(configuration);
         props.onDismiss();
@@ -136,12 +153,12 @@ function ConfigurationForm(props: Props) {
 
     return <form className={style.form}>
         <div className={style.formInputs}>
-            <Input label={"Board Name"}
-                   value={configuration.name}
+            <Input label={'Board Name'}
+                   value={configuration.name || ''}
                    onChange={(event) => setName(event.target.value)}/>
-            <Input label={"Background Image URL"}
+            <Input label={'Background Image URL'}
                    type="url"
-                   value={configuration.background}
+                   value={configuration.background || ''}
                    onChange={(event) => setBackground(event.target.value)}/>
             <div className={style.editBoardContainer}>
                 <div className={style.editBoard} data-testid="edit-pages">
@@ -150,25 +167,29 @@ function ConfigurationForm(props: Props) {
                                   page={page}
                                   pageNumber={idx}
                                   onPageChanged={changePage(idx)}
-                                  onEventMovedToNewPage={moveEventToPage}
+                                  onTileMovedToNewPage={moveTileToPage}
                                   totalPages={configuration.pages.length}
                         />,
                     )}
                     <div className={style.addRemovePage}>
                         {configuration.pages.length > 1
-                        && <button type="button" aria-label="Remove Page" className={style.addRemoveButton}
+                        && <button type="button" aria-label="Remove Page"
+                                   className={style.addRemoveButton}
                                    onClick={removePage}>
                             {Icon.remove}
                         </button>
                         }
-                        <button type="button" aria-label="Add Page" className={style.addRemoveButton} onClick={addPage}>
+                        <button type="button" aria-label="Add Page"
+                                className={style.addRemoveButton}
+                                onClick={addPage}>
                             {Icon.add}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <button type="button" data-testid="submit" className={[style.button, style.success].join(" ")}
+        <button type="button" data-testid="submit"
+                className={[style.button, style.success].join(' ')}
                 onClick={submit}>{Icon.ok}</button>
     </form>;
 }

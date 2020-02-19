@@ -18,10 +18,10 @@ import React from "react";
 import {connect} from "react-redux";
 import {animated, useTransition} from "react-spring";
 
-import {Event, Level} from "../../../model/Event";
-import {ApplicationState} from "../../../store/ApplicationState";
+import {Event, Level} from 'model/Event';
+import {ApplicationState} from 'store/ApplicationState';
 
-import EventWrapper from "../eventdisplay/EventWrapper";
+import EventWrapper from "../tile/eventdisplay/EventWrapper";
 import styles from "./Notifications.module.css";
 
 function compareLevel(a: Level, b: Level) {
@@ -62,7 +62,7 @@ function Notifications(props: Props) {
                 className={styles.eventContainer}
                 style={animatedProps}
             >
-                <EventWrapper event={item} eventDisplay={{id: item.id, isNotification: true}}/>
+                <EventWrapper event={item} eventDisplay={{id: item.id, isNotification: true, tileType: "EVENT"}}/>
             </animated.div>),
         )}
     </div>;

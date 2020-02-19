@@ -18,32 +18,13 @@ package com.ford.labs.daab.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
 
 @Configuration
 public class EventRegistrationRedisTemplateConfig {
     @Bean
-    public Jackson2JsonRedisSerializer<String> eventRegistrationSerializer() {
-        return new Jackson2JsonRedisSerializer<>(String.class);
-    }
-
-    @Bean
-    public RedisSerializationContext<String, String> eventRegistrationSerializationContext(Jackson2JsonRedisSerializer<String> eventSerializer) {
-        RedisSerializationContext.RedisSerializationContextBuilder<String, String> builder = RedisSerializationContext.newSerializationContext(eventSerializer);
-        return builder.value(eventSerializer).build();
-    }
-
-    @Bean
-    public ReactiveRedisTemplate<String, String> eventRegistrationRedisTemplate(ReactiveRedisConnectionFactory factory, RedisSerializationContext<String, String> eventSerializationContext) {
-        return new ReactiveRedisTemplate<>(factory, eventSerializationContext);
-    }
-
-    @Bean
-    public ReactiveHashOperations<String, String, String> eventRegistrationRedisHashOperations(ReactiveRedisTemplate<String, String> reactiveRedisTemplate, RedisSerializationContext<String, String> eventSerializationContext) {
-        return reactiveRedisTemplate.opsForHash(eventSerializationContext);
+    public ReactiveHashOperations<String, String, String> eventRegistrationRedisHashOperations(ReactiveRedisTemplate<String, String> reactiveRedisTemplate) {
+        return reactiveRedisTemplate.opsForHash(reactiveRedisTemplate.getSerializationContext());
     }
 }

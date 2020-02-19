@@ -15,12 +15,12 @@
  */
 
 import React from "react";
-import {WeatherEvent} from "../../../model/WeatherEvent";
-import {WeatherIcon, WeatherType} from "../../icon/WeatherIcon";
+import {WeatherEvent} from 'model/WeatherEvent';
+import {WeatherIcon, WeatherType} from "../../../icon/WeatherIcon";
 import {EventDisplay} from "./EventDisplay";
 
 import styles from "./EventDisplay.module.css";
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 
 interface Props {
     event: WeatherEvent

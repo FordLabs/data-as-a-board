@@ -23,7 +23,7 @@ import "weather-icons/css/weather-icons.css";
 
 import "typeface-montserrat";
 
-import {App} from "./components/App";
+import {App} from 'components/App';
 import ConfigurationLoader from "./ConfigurationLoader";
 import {store} from "./store";
 import Subscriber from "./Subscriber";

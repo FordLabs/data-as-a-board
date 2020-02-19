@@ -16,28 +16,19 @@
 
 import React from "react";
 
-import {Statistic, StatisticsEvent} from "../../../model/StatisticsEvent";
-import {EventDisplay} from "./EventDisplay";
+import {Event} from 'model/Event';
 
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
+import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
 
 interface Props {
-    event: StatisticsEvent
-    display: EventDisplayProperties
+    event: Event;
+    display: EventDisplayProperties;
 }
 
-function StatisticDisplay(statistic: Statistic) {
-    return <div className={styles.statistic} key={statistic.name}>
-        {statistic.value} {statistic.name}
-    </div>
-
-}
-
-export function StatisticsEventDisplay(props: Props) {
+export function UnknownEventDisplay(props: Props) {
     return <EventDisplay event={props.event} display={props.display}>
-        <div className={styles.statistics}>
-            {props.event.statistics.map(StatisticDisplay)}
-        </div>
-    </EventDisplay>
+        <p className={styles.textWrap}>{JSON.stringify(props.event)}</p>
+    </EventDisplay>;
 }

@@ -16,12 +16,12 @@
 
 import React from "react";
 
-import {JobEvent} from "../../../model/JobEvent";
-import Icon from "../../icon/Icon";
-import {HealthEvent} from "../../../model/HealthEvent";
+import {JobEvent} from 'model/JobEvent';
+import Icon from "../../../icon/Icon";
+import {HealthEvent} from 'model/HealthEvent';
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 
 export interface Props {
     event: JobEvent

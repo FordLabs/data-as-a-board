@@ -15,8 +15,8 @@
  */
 
 import {Store} from "redux";
-import {ApplicationState} from "./store/ApplicationState";
-import {emitConnected, emitDisconnected, updateEvent} from "./store/dashboard/actions";
+import {ApplicationState} from 'store/ApplicationState';
+import {emitConnected, emitDisconnected, updateEvent} from 'store/dashboard/actions';
 
 export default class Subscriber {
     private readonly store: Store<ApplicationState>;

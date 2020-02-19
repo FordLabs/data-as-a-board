@@ -14,23 +14,27 @@
  *
  */
 
-import React from "react";
-
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
-import {FigureEvent} from "../../../model/FigureEvent";
+import {QuoteEvent} from 'model/QuoteEvent';
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
+import React from "react";
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
 
 interface Props {
-    event: FigureEvent;
+    event: QuoteEvent;
     display: EventDisplayProperties;
 }
 
-export function FigureEventDisplay(props: Props) {
+export function QuoteEventDisplay(props: Props) {
+    const quoteDisplayClassName = [styles.quoteDisplay];
+    if (props.display && props.display.width && props.display.width > 1) {
+        quoteDisplayClassName.push(styles["quoteDisplay--wide"]);
+    }
+
     return <EventDisplay event={props.event} display={props.display}>
-        <div className={styles.figureWithLabel}>
-            <span>{props.event.value}</span>
-            <span>{props.event.subtext}</span>
+        <div className={quoteDisplayClassName.join(" ")}>
+            <div className={styles.quoteDisplay__quote}>{props.event.quote}</div>
+            {props.event.author && <div className={styles.quoteDisplay__author}>{props.event.author}</div>}
         </div>
     </EventDisplay>;
 }

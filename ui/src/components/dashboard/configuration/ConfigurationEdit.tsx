@@ -18,7 +18,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {animated, useSpring} from "react-spring";
 
-import {ApplicationState} from "../../../store/ApplicationState";
+import {ApplicationState} from 'store/ApplicationState';
 
 import styles from "./Configuration.module.css";
 import ConfigurationForm from "./ConfigurationForm";
@@ -38,7 +38,7 @@ function ConfigurationEdit(props: Props) {
     return <animated.div className={styles.container} style={transition}>
         <ConfigurationForm/>
         <datalist id="events">
-            {props.eventIds.map(id => <option value={id}/>)}
+            {props.eventIds.map(id => <option value={id} key={id}/>)}
         </datalist>
     </animated.div>;
 }

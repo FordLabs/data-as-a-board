@@ -15,9 +15,9 @@
  */
 
 import {Reducer} from "redux";
-import {Configuration} from "../../model/Configuration";
-import {Event} from "../../model/Event";
-import {EventMap} from "../../model/EventMap";
+import {Configuration} from 'model/Configuration';
+import {Event} from 'model/Event';
+import {EventMap} from 'model/EventMap';
 import {ActionTypes} from "./actions";
 import {DashboardState} from "./state";
 

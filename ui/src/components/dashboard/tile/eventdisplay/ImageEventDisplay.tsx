@@ -14,21 +14,22 @@
  *
  */
 
-import React from "react";
+import * as React from "react";
 
-import {Event} from "../../../model/Event";
-
-import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
 import {EventDisplay} from "./EventDisplay";
-import styles from "./EventDisplay.module.css";
+
+import {EventDisplayProperties} from 'model/EventDisplayProperties';
+import {ImageEvent} from 'model/ImageEvent';
+
+import styles from "./ImageEventDisplay.module.css";
 
 interface Props {
-    event: Event;
+    event: ImageEvent;
     display: EventDisplayProperties;
 }
 
-export function UnknownEventDisplay(props: Props) {
+export function ImageEventDisplay(props: Props) {
     return <EventDisplay event={props.event} display={props.display}>
-        <p className={styles.textWrap}>{JSON.stringify(props.event)}</p>
+        <img className={styles.image} src={props.event.src} alt={props.event.src}/>
     </EventDisplay>;
 }

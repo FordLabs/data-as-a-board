@@ -15,8 +15,8 @@
  */
 
 import {createStore} from "redux";
-import {Level} from "../model/Event";
-import {Event} from "../model/Event";
+import {Level} from 'model/Event';
+import {Event} from 'model/Event';
 import {
     emitConnected,
     emitDisconnected,
@@ -84,7 +84,7 @@ it("loadConfiguration sets configuration state", () => {
             name: "The Page",
             rows: 3,
             columns: 5,
-            events: [],
+            tiles: [],
         }],
         background: "https://imagehost.local/image.jpg",
     };
@@ -106,13 +106,13 @@ it("gotoPage goes to specified page", () => {
                     name: "The Page",
                     rows: 3,
                     columns: 5,
-                    events: [],
+                    tiles: [],
                 },
                 {
                     name: "The Other Page",
                     rows: 3,
                     columns: 5,
-                    events: [],
+                    tiles: [],
                 },
             ],
             name: "",
@@ -135,13 +135,13 @@ it("incrementPage increments page", () => {
                     name: "The Page",
                     rows: 3,
                     columns: 5,
-                    events: [],
+                    tiles: [],
                 },
                 {
                     name: "The Other Page",
                     rows: 3,
                     columns: 5,
-                    events: [],
+                    tiles: [],
                 },
             ],
             name: "",
