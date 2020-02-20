@@ -23,6 +23,7 @@ import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
 import {useInterval} from "../../../../hooks/useInterval";
 import {humanizeDurationPrecise} from "../../../../converters/humanizeDurationPrecise";
+import {Level} from "../../../../model/event/Event";
 
 interface Props {
     event: CountdownEvent;
@@ -45,7 +46,12 @@ export function CountdownEventDisplay(props: Props) {
     const value = humanized.slice(0, indexOfFirstSpace);
     const subtext = humanized.slice(indexOfFirstSpace);
 
-    return <EventDisplay event={props.event} display={props.display}>
+    const renderEvent = {
+        ...props.event,
+        level: countdownTime.isBefore(now) ? Level.ERROR : props.event.level
+    };
+
+    return <EventDisplay event={renderEvent} display={props.display}>
         <div className={styles.figureWithLabel}>
             <span>{value}</span>
             <span>{subtext}</span>

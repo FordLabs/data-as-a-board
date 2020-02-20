@@ -46,8 +46,6 @@ export type Event =
     | ImageEvent
     | CountdownEvent
 
-
-
 export enum Level {
     OK = "OK",
     UNKNOWN = "UNKNOWN",

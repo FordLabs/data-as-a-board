@@ -51,27 +51,27 @@ function EventWrapper({event, display}: { event?: Event, display: EventDisplayPr
     if (!event) {
         return <div/>;
     }
-    switch (event.eventType ? event.eventType : "UNKNOWN") {
+    switch (event.eventType) {
         case "HEALTH":
-            return <HealthEventDisplay event={event as HealthEvent} display={display}/>;
+            return <HealthEventDisplay event={event} display={display}/>;
         case "JOB":
-            return <JobEventDisplay event={event as JobEvent} display={display}/>;
+            return <JobEventDisplay event={event} display={display}/>;
         case "FIGURE":
-            return <FigureEventDisplay event={event as FigureEvent} display={display}/>;
+            return <FigureEventDisplay event={event} display={display}/>;
         case "QUOTE":
-            return <QuoteEventDisplay event={event as QuoteEvent} display={display}/>;
+            return <QuoteEventDisplay event={event} display={display}/>;
         case "PERCENTAGE":
-            return <PercentageEventDisplay event={event as PercentageEvent} display={display}/>;
+            return <PercentageEventDisplay event={event} display={display}/>;
         case "STATISTICS":
-            return <StatisticsEventDisplay event={event as StatisticsEvent} display={display}/>;
+            return <StatisticsEventDisplay event={event} display={display}/>;
         case "WEATHER":
-            return <WeatherEventDisplay event={event as WeatherEvent} display={display}/>;
+            return <WeatherEventDisplay event={event} display={display}/>;
         case "LIST":
-            return <ListEventDisplay event={event as ListEvent} display={display}/>;
+            return <ListEventDisplay event={event} display={display}/>;
         case "IMAGE":
-            return <ImageEventDisplay event={event as ImageEvent} display={display}/>;
+            return <ImageEventDisplay event={event} display={display}/>;
         case "COUNTDOWN":
-            return <CountdownEventDisplay event={event as CountdownEvent} display={display}/>;
+            return <CountdownEventDisplay event={event} display={display}/>;
         default:
             return <UnknownEventDisplay event={event} display={display}/>;
     }
