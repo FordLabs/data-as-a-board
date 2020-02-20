@@ -16,17 +16,14 @@
 
 package com.ford.labs.daab.event;
 
-public class EventType {
-    public static final String HEALTH = "HEALTH";
-    public static final String JOB = "JOB";
-    public static final String FIGURE = "FIGURE";
-    public static final String QUOTE = "QUOTE";
-    public static final String PERCENTAGE = "PERCENTAGE";
-    public static final String STATISTICS = "STATISTICS";
-    public static final String WEATHER = "WEATHER";
-    public static final String LIST = "LIST";
-    public static final String IMAGE = "IMAGE";
-    public static final String UNKNOWN = "UNKNOWN";
-    public static final String COUNTDOWN = "COUNTDOWN";
-    public static final String ALL = "ALL";
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class CountdownEvent extends Event {
+    String countdownTime;
+
+    @Override
+    public String getEventType() { return EventType.COUNTDOWN; }
 }

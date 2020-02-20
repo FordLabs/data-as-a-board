@@ -14,7 +14,9 @@
  *
  */
 
-package com.ford.labs.daab.event;import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.ford.labs.daab.event;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -35,6 +37,7 @@ import java.time.format.DateTimeFormatter;
         @JsonSubTypes.Type(value = StatisticsEvent.class, name = EventType.STATISTICS),
         @JsonSubTypes.Type(value = WeatherEvent.class, name = EventType.WEATHER),
         @JsonSubTypes.Type(value = ListEvent.class, name = EventType.LIST),
+        @JsonSubTypes.Type(value = CountdownEvent.class, name = EventType.COUNTDOWN),
         @JsonSubTypes.Type(value = ImageEvent.class, name = EventType.IMAGE)
 })
 public class Event {

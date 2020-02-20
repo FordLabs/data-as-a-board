@@ -17,20 +17,15 @@
 import moment from "moment";
 import React, {useState} from "react";
 import {useInterval} from 'hooks/useInterval';
+import {humanizeDurationPrecise} from "../../../../converters/humanizeDurationPrecise";
 
 interface Props {
     time?: string;
 }
 
-function formatFromNow(time: string) {
+function formatFromNow(time: string): string {
     const timeMoment = moment(time);
-
-    return timeMoment.isBefore(moment().subtract(1, "days"))
-        ? timeMoment.calendar(undefined, {
-            lastDay: "[yesterday]",
-            lastWeek: "[last] dddd ",
-        })
-        : timeMoment.fromNow();
+    return humanizeDurationPrecise(moment.duration(timeMoment.diff(moment.now())));
 }
 
 function PresentTimestampDisplay(props: { time: string }) {
