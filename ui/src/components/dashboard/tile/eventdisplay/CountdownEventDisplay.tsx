@@ -18,7 +18,7 @@ import React, {useMemo, useState} from "react";
 import moment from "moment";
 
 import {EventDisplayProperties} from 'model/EventDisplayProperties';
-import {CountdownEvent} from "model/CountdownEvent";
+import {CountdownEvent} from "model/event/CountdownEvent";
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
 import {useInterval} from "../../../../hooks/useInterval";

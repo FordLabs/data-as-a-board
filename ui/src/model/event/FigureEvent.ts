@@ -14,9 +14,11 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface QuoteEvent extends Event {
-    quote: string;
-    author: string;
+export interface FigureEvent extends AbstractEvent {
+    value: string;
+    subtext: string;
+
+    eventType: "FIGURE";
 }

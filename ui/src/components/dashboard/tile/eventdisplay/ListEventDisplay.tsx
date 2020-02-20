@@ -17,7 +17,7 @@
 import React from "react";
 
 import {EventDisplayProperties} from 'model/EventDisplayProperties';
-import {ListEvent, Section} from 'model/ListEvent';
+import {ListEvent, Section} from 'model/event/ListEvent';
 import {EventDisplay} from "./EventDisplay";
 
 import styles from "./ListEventDisplay.module.css";

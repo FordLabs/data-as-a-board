@@ -14,10 +14,15 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface WeatherEvent extends Event {
-    condition: string;
-    temperature: number;
-    temperatureUnit: string;
+export interface ListEvent extends AbstractEvent {
+    sections: Section[];
+
+    eventType: "LIST";
+}
+
+export interface Section {
+    name: string;
+    items: string[];
 }

@@ -14,13 +14,10 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface ListEvent extends Event {
-    sections: Section[];
-}
+export interface ImageEvent extends AbstractEvent {
+    src: string;
 
-export interface Section {
-    name: string;
-    items: string[];
+    eventType: "IMAGE";
 }

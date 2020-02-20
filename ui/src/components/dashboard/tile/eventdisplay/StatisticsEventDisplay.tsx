@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import {Statistic, StatisticsEvent} from 'model/StatisticsEvent';
+import {Statistic, StatisticsEvent} from 'model/event/StatisticsEvent';
 import {EventDisplay} from "./EventDisplay";
 
 import styles from "./EventDisplay.module.css";

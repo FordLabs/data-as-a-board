@@ -19,7 +19,7 @@ import * as React from "react";
 import {EventDisplay} from "./EventDisplay";
 
 import {EventDisplayProperties} from 'model/EventDisplayProperties';
-import {ImageEvent} from 'model/ImageEvent';
+import {ImageEvent} from 'model/event/ImageEvent';
 
 import styles from "./ImageEventDisplay.module.css";
 

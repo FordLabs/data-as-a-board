@@ -16,10 +16,11 @@
 
 import {Reducer} from "redux";
 import {Configuration} from 'model/Configuration';
-import {Event} from 'model/Event';
+import {Event} from 'model/event/Event';
 import {EventMap} from 'model/EventMap';
 import {ActionTypes} from "./actions";
 import {DashboardState} from "./state";
+import moment from "moment";
 
 const initialState: DashboardState = {
     configuration: {

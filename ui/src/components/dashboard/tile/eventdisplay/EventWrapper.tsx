@@ -17,17 +17,17 @@
 import React from "react";
 
 import {connect} from "react-redux";
-import {Event} from 'model/Event';
+import {Event} from 'model/event/Event';
 import {EventDisplayProperties} from 'model/EventDisplayProperties';
-import {FigureEvent} from 'model/FigureEvent';
-import {HealthEvent} from 'model/HealthEvent';
-import {ImageEvent} from 'model/ImageEvent';
-import {JobEvent} from 'model/JobEvent';
-import {ListEvent} from 'model/ListEvent';
-import {PercentageEvent} from 'model/PercentageEvent';
-import {QuoteEvent} from 'model/QuoteEvent';
-import {StatisticsEvent} from 'model/StatisticsEvent';
-import {WeatherEvent} from 'model/WeatherEvent';
+import {FigureEvent} from 'model/event/FigureEvent';
+import {HealthEvent} from 'model/event/HealthEvent';
+import {ImageEvent} from 'model/event/ImageEvent';
+import {JobEvent} from 'model/event/JobEvent';
+import {ListEvent} from 'model/event/ListEvent';
+import {PercentageEvent} from 'model/event/PercentageEvent';
+import {QuoteEvent} from 'model/event/QuoteEvent';
+import {StatisticsEvent} from 'model/event/StatisticsEvent';
+import {WeatherEvent} from 'model/event/WeatherEvent';
 import {ApplicationState} from 'store/ApplicationState';
 import {FigureEventDisplay} from "./FigureEventDisplay";
 import {HealthEventDisplay} from "./HealthEventDisplay";
@@ -39,7 +39,7 @@ import {QuoteEventDisplay} from "./QuoteEventDisplay";
 import {StatisticsEventDisplay} from "./StatisticsEventDisplay";
 import {UnknownEventDisplay} from "./UnknownEventDisplay";
 import {WeatherEventDisplay} from "./WeatherEventDisplay";
-import {CountdownEvent} from "../../../../model/CountdownEvent";
+import {CountdownEvent} from "../../../../model/event/CountdownEvent";
 import {CountdownEventDisplay} from "./CountdownEventDisplay";
 
 export interface Props {

@@ -15,7 +15,7 @@
  */
 
 import {action} from "typesafe-actions";
-import {Event} from "../../model/Event";
+import {Event} from "../../model/event/Event";
 import {Configuration} from 'model/Configuration';
 
 export enum ActionTypes {

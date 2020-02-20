@@ -14,8 +14,10 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface PercentageEvent extends Event {
+export interface PercentageEvent extends AbstractEvent {
     value: number;
+
+    eventType: "PERCENTAGE";
 }

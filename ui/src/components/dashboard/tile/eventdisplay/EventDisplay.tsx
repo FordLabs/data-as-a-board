@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import {Event, Level} from 'model/Event';
+import {Event, Level} from 'model/event/Event';
 
 import {EventDisplayProperties} from 'model/EventDisplayProperties';
 import styles from "./EventDisplay.module.css";
@@ -57,10 +57,7 @@ function gridStyle(display: EventDisplayProperties) {
 export const EventDisplay: React.FC<Props> = (props) => {
     const eventName = (props.event.name || "").toUpperCase();
 
-    const eventType: string =
-        props.event.eventType && props.event.eventType !== "UNKNOWN"
-            ? props.event.eventType.toUpperCase()
-            : " ";
+    const eventType: string = props.event.eventType.toUpperCase();
 
     const fillStyle = props.display.fill ? styles.event_fill : "";
     const alertStyle = props.display.isNotification ? "" : styles.shake;

@@ -14,13 +14,8 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface StatisticsEvent extends Event {
-    statistics: Statistic[];
-}
-
-export interface Statistic {
-    name: string;
-    value: string;
+export interface UnknownEvent extends AbstractEvent {
+    eventType: "UNKNOWN" | undefined;
 }

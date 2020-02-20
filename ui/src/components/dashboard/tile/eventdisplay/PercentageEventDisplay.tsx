@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import {PercentageEvent} from 'model/PercentageEvent';
+import {PercentageEvent} from 'model/event/PercentageEvent';
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
 import {EventDisplayProperties} from 'model/EventDisplayProperties';

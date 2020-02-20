@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import {HealthEvent} from 'model/HealthEvent';
+import {HealthEvent} from 'model/event/HealthEvent';
 import Icon from "../../../icon/Icon";
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";

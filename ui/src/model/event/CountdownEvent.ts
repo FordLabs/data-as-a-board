@@ -14,19 +14,10 @@
  *
  */
 
-export interface Event {
-    id: string;
-    eventType: string;
-    level: Level;
-    name: string;
-    time: string;
-}
+import {AbstractEvent} from "./Event";
 
-export enum Level {
-    OK = "OK",
-    UNKNOWN = "UNKNOWN",
-    DISABLED = "DISABLED",
-    INFO = "INFO",
-    WARN = "WARN",
-    ERROR = "ERROR",
+export interface CountdownEvent extends AbstractEvent {
+    countdownTime: string;
+
+    eventType: "COUNTDOWN"
 }

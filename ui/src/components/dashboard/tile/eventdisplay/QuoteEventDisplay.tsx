@@ -14,7 +14,7 @@
  *
  */
 
-import {QuoteEvent} from 'model/QuoteEvent';
+import {QuoteEvent} from 'model/event/QuoteEvent';
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
 import React from "react";

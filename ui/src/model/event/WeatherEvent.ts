@@ -14,8 +14,12 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface ImageEvent extends Event {
-    src: string;
+export interface WeatherEvent extends AbstractEvent {
+    condition: string;
+    temperature: number;
+    temperatureUnit: string;
+
+    eventType: "WEATHER";
 }

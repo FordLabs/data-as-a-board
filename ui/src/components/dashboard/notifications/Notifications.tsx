@@ -18,7 +18,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {animated, useTransition} from "react-spring";
 
-import {Event, Level} from 'model/Event';
+import {Event, Level} from 'model/event/Event';
 import {ApplicationState} from 'store/ApplicationState';
 
 import EventWrapper from "../tile/eventdisplay/EventWrapper";

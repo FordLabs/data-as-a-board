@@ -15,8 +15,8 @@
  */
 
 import {createStore} from "redux";
-import {Level} from 'model/Event';
-import {Event} from 'model/Event';
+import {Level} from 'model/event/Event';
+import {Event} from 'model/event/Event';
 import {
     emitConnected,
     emitDisconnected,

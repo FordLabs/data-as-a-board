@@ -14,8 +14,10 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface JobEvent extends Event {
+export interface HealthEvent extends AbstractEvent {
     status: string;
+
+    eventType: "HEALTH";
 }

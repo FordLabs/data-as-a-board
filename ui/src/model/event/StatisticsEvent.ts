@@ -14,8 +14,15 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface HealthEvent extends Event {
-    status: string;
+export interface StatisticsEvent extends AbstractEvent {
+    statistics: Statistic[];
+
+    eventType: "STATISTICS";
+}
+
+export interface Statistic {
+    name: string;
+    value: string;
 }

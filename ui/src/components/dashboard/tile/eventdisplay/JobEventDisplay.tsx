@@ -16,9 +16,9 @@
 
 import React from "react";
 
-import {JobEvent} from 'model/JobEvent';
+import {JobEvent} from 'model/event/JobEvent';
 import Icon from "../../../icon/Icon";
-import {HealthEvent} from 'model/HealthEvent';
+import {HealthEvent} from 'model/event/HealthEvent';
 import {EventDisplay} from "./EventDisplay";
 import styles from "./EventDisplay.module.css";
 import {EventDisplayProperties} from 'model/EventDisplayProperties';
@@ -37,7 +37,7 @@ export function JobEventDisplay(props: Props) {
     </EventDisplay>
 }
 
-function icon(event: HealthEvent) {
+function icon(event: JobEvent) {
     switch (event.status) {
         case "SUCCESS":
             return Icon.ok;
@@ -54,7 +54,7 @@ function icon(event: HealthEvent) {
     }
 }
 
-function displayStatus(event: HealthEvent): string {
+function displayStatus(event: JobEvent): string {
     switch (event.status) {
         case "SUCCESS":
             return "Success";

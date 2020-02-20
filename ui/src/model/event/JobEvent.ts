@@ -14,8 +14,10 @@
  *
  */
 
-import {Event} from "./Event";
+import {AbstractEvent} from "./Event";
 
-export interface CountdownEvent extends Event {
-    countdownTime: string;
+export interface JobEvent extends AbstractEvent {
+    status: string;
+
+    eventType: "JOB";
 }

@@ -14,7 +14,7 @@
  *
  */
 
-import {Event} from "./Event";
+import {Event} from "./event/Event";
 
 export interface EventMap extends Map<string, Event> {
 }

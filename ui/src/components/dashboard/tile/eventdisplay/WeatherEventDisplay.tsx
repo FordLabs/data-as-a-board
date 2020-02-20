@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import {WeatherEvent} from 'model/WeatherEvent';
+import {WeatherEvent} from 'model/event/WeatherEvent';
 import {WeatherIcon, WeatherType} from "../../../icon/WeatherIcon";
 import {EventDisplay} from "./EventDisplay";
 
