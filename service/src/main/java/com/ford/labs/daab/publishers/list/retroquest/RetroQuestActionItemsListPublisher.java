@@ -61,7 +61,7 @@ public class RetroQuestActionItemsListPublisher {
         this.properties = properties;
     }
 
-    @Scheduled(fixedRate = 300000)
+    @Scheduled(fixedRate = 60000)
     public void scheduledTask() {
         pollActionItems().blockLast();
     }
