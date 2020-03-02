@@ -140,7 +140,30 @@ describe("Dashboard", () => {
         expect(notification).toHaveTextContent("TEST EVENT");
     });
 
+    it("should not show notifications for any events that are on a page", () => {
+        const initialState = baseState();
+        initialState.dashboard.configuration.pages = [
+            {
+                tiles: [{
+                    tileType: "EVENT",
+                    id: "job.test",
+                } as EventDisplayProperties],
+                name: "Page 1"
+            }
+        ];
+        initialState.dashboard.events.set("job.test", {
+            id: "job.test",
+            eventType: "JOB",
+            level: Level.ERROR,
+            name: "Test Event",
+            time: "2019-01-01T00:00:00.000Z",
 
+            status: "FAILURE",
+        } as JobEvent);
 
+        const {dashboard} = mountDashboard(initialState);
+        const notifications = dashboard.getByTestId("@dashboard-notifications");
 
+        expect(notifications.childNodes).toHaveLength(0);
+    });
 });

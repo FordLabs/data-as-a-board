@@ -18,11 +18,13 @@ import React from "react";
 import {connect} from "react-redux";
 import {animated, useTransition} from "react-spring";
 
-import {Event, Level} from 'model/event/Event';
-import {ApplicationState} from 'store/ApplicationState';
+import {Event, Level} from "model/event/Event";
+import {ApplicationState} from "store/ApplicationState";
 
 import EventWrapper from "../tile/eventdisplay/EventWrapper";
 import styles from "./Notifications.module.css";
+import {Page} from "model/Page";
+import {EventDisplayProperties} from "../../../model/EventDisplayProperties";
 
 function compareLevel(a: Level, b: Level) {
     const map: Map<Level, number> = new Map<Level, number>();
@@ -68,9 +70,24 @@ function Notifications(props: Props) {
     </div>;
 }
 
+function eventIsOk(event: Event) {
+    return event.level !== Level.OK;
+}
+
+function eventIsNotOnPage(pages: Page[]) {
+    const eventIdsOnPage = pages
+        .flatMap(page => page.tiles)
+        .filter(tile => tile.tileType === "EVENT")
+        .map(tile => tile as EventDisplayProperties)
+        .map(eventDisplayProperties => eventDisplayProperties.id);
+
+    return (event: Event) => !eventIdsOnPage.includes(event.id);
+}
+
 const mapStateToProps = (state: ApplicationState): Props => ({
     events: Array.from(state.dashboard.events.values())
-        .filter((event) => event.level !== Level.OK)
+        .filter(eventIsNotOnPage(state.dashboard.configuration.pages))
+        .filter(eventIsOk)
         .sort((a, b) => {
             const comparingLevel = compareLevel(a.level, b.level);
 
