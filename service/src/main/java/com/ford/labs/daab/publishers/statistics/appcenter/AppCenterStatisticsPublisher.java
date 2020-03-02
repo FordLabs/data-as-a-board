@@ -72,7 +72,8 @@ public class AppCenterStatisticsPublisher {
                     return event;
                 })
                 .flatMap(eventPublishingService::publish)
-                .doOnError(e -> log.error("Error publishing event for app statistics from AppCenter.", e))
+                .onErrorMap(e -> new RuntimeException("Error publishing event for app statistics from AppCenter.", e))
+                .doOnError(e -> log.error(e.getMessage(), e))
                 .blockLast();
     }
 
@@ -82,10 +83,7 @@ public class AppCenterStatisticsPublisher {
                 .retrieve()
                 .bodyToFlux(CountResponse.class)
                 .map(countResponse -> new AppCenterStatistic(app, new StatisticsEvent.Statistic("active sessions today", countResponse.count)))
-                .onErrorResume(e -> {
-                    log.error("Error retrieving app with name " + app.getAppname() + " statistics in AppCenter.", e);
-                    return Flux.empty();
-                });
+                .doOnError(e -> log.error("Error retrieving app with name " + app.getAppname() + " statistics in AppCenter.", e));
     }
 
     private List<AppCenterApp> getApps() {

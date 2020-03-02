@@ -34,10 +34,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static com.ford.labs.daab.WireMockExtension.WIREMOCK_URL;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
@@ -72,7 +74,7 @@ class AppCenterStatisticsPublisherTest {
         when(mockEventPublishingService.publish(any())).thenReturn(Mono.just(1L));
         when(mockEventClock.getISOFormattedDateTime()).thenReturn("Hammertime");
 
-        wireMock.getServer().stubFor(get(urlEqualTo("/v0.1/apps/testowner/testapp/analytics/session_counts?start=" + LocalDate.now() + "&interval=P1D"))
+        wireMock.getServer().stubFor(get(urlEqualTo(String.format("/v0.1/apps/testowner/testapp/analytics/session_counts?start=%s&interval=P1D", LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))))
                 .willReturn(okJson("[\n" +
                         "  {\n" +
                         "    \"datetime\": \"2019-05-23T00:00:00Z\",\n" +
@@ -80,7 +82,7 @@ class AppCenterStatisticsPublisherTest {
                         "  }\n" +
                         "]")));
 
-        wireMock.getServer().stubFor(get(urlEqualTo("/v0.1/apps/testowner2/testapp2/analytics/session_counts?start=" + LocalDate.now() + "&interval=P1D"))
+        wireMock.getServer().stubFor(get(urlEqualTo(String.format("/v0.1/apps/testowner2/testapp2/analytics/session_counts?start=%s&interval=P1D", LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))))
                 .willReturn(okJson("[\n" +
                         "  {\n" +
                         "    \"datetime\": \"2019-05-23T00:00:00Z\",\n" +
@@ -112,12 +114,8 @@ class AppCenterStatisticsPublisherTest {
     public void haltsJobExecutionOnFailureToPublishAnyEvent() {
         when(mockEventPublishingService.publish(buildEvent(app, "active sessions today", "35"))).thenThrow(new RuntimeException("I can't connect to Redis"));
 
-        try {
-            subject.pollApps();
-            fail("expected an exception.");
-        } catch (Exception e) {
-            assertThat(e.getMessage()).isEqualTo("I can't connect to Redis");
-        }
+        assertThatThrownBy(() -> subject.pollApps())
+                .hasMessage("Error publishing event for app statistics from AppCenter.");
     }
 
     @Test
