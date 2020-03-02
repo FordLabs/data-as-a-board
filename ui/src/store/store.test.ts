@@ -15,8 +15,8 @@
  */
 
 import {createStore} from "redux";
-import {Level} from 'model/event/Event';
-import {Event} from 'model/event/Event';
+import {Level} from "model/event/Event";
+import {Event} from "model/event/Event";
 import {
     emitConnected,
     emitDisconnected,
@@ -171,7 +171,8 @@ it("updateEvent updates event", () => {
 
     initialState.events.set("some.random.event", {
         id: "some.random.event",
-        eventType: "SOMETYPE",
+        // @ts-ignore
+        eventType: "UNKNOWN",
         level: Level.OK,
         name: "Some Random Event",
         time: "2017-01-01T00:00:00.000Z",
@@ -179,9 +180,10 @@ it("updateEvent updates event", () => {
 
     const store = createTestStore(initialState);
 
-    const event = {
+    const event: Event = {
         id: "some.random.event",
-        eventType: "SOMETYPE",
+        // @ts-ignore
+        eventType: "UNKNOWN",
         level: Level.OK,
         name: "Some New Random Event",
         time: "2020-01-01T00:00:00.000Z",

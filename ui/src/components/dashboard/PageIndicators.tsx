@@ -30,7 +30,7 @@ interface Props {
 
 function PageIndicators(props: Props) {
     return (
-        <div className={styles.radiatorPageIndicators}>
+        <div className={styles.radiatorPageIndicators} data-testid={"@dashboard-indicators"}>
             {
                 [...Array(props.totalPages)].map(
                     (x, i) => <PageIndicator

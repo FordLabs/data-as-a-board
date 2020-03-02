@@ -65,6 +65,7 @@ export const EventDisplay: React.FC<Props> = (props) => {
     return <div
         className={`${styles.event} ${fillStyle} ${alertStyle} ${mapLevelToStyle(props.event)}`}
         style={props.display.isNotification ? {} : gridStyle(props.display)}
+        data-testid={`@dashboard-event-${props.event.id}`}
     >
         {!props.display.fill && <div className={styles.header}>{eventName}</div>}
         <div className={styles.body}>{props.children}</div>

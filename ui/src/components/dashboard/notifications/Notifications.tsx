@@ -55,7 +55,7 @@ function Notifications(props: Props) {
         },
     );
 
-    return <div className={styles.notificationsContainer}>
+    return <div className={styles.notificationsContainer} data-testid={"@dashboard-notifications"}>
         {transitions.map(({item, props: animatedProps, key}) =>
             (<animated.div
                 key={key}
