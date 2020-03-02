@@ -38,9 +38,7 @@ import java.time.format.DateTimeFormatter;
 
 import static com.ford.labs.daab.WireMockExtension.WIREMOCK_URL;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.*;
@@ -96,17 +94,6 @@ class AppCenterStatisticsPublisherTest {
         subject.pollApps();
 
         verify(mockEventPublishingService).publish(buildEvent(app, "active sessions today", "35"));
-        verify(mockEventPublishingService).publish(buildEvent(app2, "active sessions today", "3"));
-    }
-
-    @Test
-    void continuesToNextAppOnFailureTalkingToAppCenterForFirstApp() {
-        wireMock.getServer().stubFor(get(urlEqualTo("/v0.1/apps/testowner/testapp/analytics/session_counts?start=" + LocalDate.now() + "&interval=P1D"))
-                .willReturn(serverError()));
-
-        subject.pollApps();
-
-        verify(mockEventPublishingService, never()).publish(buildEvent(app, "active sessions today", "35"));
         verify(mockEventPublishingService).publish(buildEvent(app2, "active sessions today", "3"));
     }
 
