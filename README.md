@@ -1,5 +1,7 @@
 # Data as a Board
 
+![build](https://github.com/FordLabs/data-as-a-board/workflows/build/badge.svg?branch=master)
+
 Your radiator, your way!
 
 ![Sample Radiator Screen](images/daab.png "FL Radiator")
