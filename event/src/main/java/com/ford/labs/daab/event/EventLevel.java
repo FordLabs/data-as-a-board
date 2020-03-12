@@ -14,7 +14,9 @@
  *
  */
 
-package com.ford.labs.daab.event;public enum EventLevel {
+package com.ford.labs.daab.event;
+
+public enum EventLevel {
     OK,
     UNKNOWN,
     DISABLED,

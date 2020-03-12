@@ -14,7 +14,7 @@
  *
  */
 
-package com.ford.labs.daab.publishers.health;
+package com.ford.labs.daab.publishers.health.generic;
 
 import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.health.HealthApplication;
