@@ -20,7 +20,9 @@ import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.job.JenkinsJob;
 import com.ford.labs.daab.config.event.properties.job.JenkinsJobProperties;
 import com.ford.labs.daab.config.event.properties.job.JobProperties;
+import com.ford.labs.daab.event.EventLevel;
 import com.ford.labs.daab.event.JobEvent;
+import com.ford.labs.daab.event.StatusEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -57,15 +59,8 @@ public class JenkinsJobPublisher {
     public void pollJobs() {
         for (var job : getJenkinsJobs()) {
             makeRequest(job)
-                    .flatMap(response -> buildJenkinsJobEvent(job, response))
-                    .onErrorResume(error -> {
-                        var event = new JobEvent();
-                        event.setId("job.jenkins." + job.getId());
-                        event.setName(job.getName());
-                        event.setStatus(JobEvent.Status.UNKNOWN);
-                        event.setTime(null);
-                        return Mono.just(event);
-                    })
+                    .flatMap(response -> buildJenkinsStatusEvent(job, response))
+                    .onErrorResume(error -> buildUnknownStatusEvent(job))
                     .flatMap(eventPublishingService::publish)
                     .block();
         }
@@ -106,11 +101,14 @@ public class JenkinsJobPublisher {
                 .orElse(emptyList());
     }
 
-    private Mono<JobEvent> buildJenkinsJobEvent(JenkinsJob job, JenkinsJobResponse jenkinsJobResponse) {
-        var event = new JobEvent();
+    private Mono<StatusEvent> buildJenkinsStatusEvent(JenkinsJob job, JenkinsJobResponse jenkinsJobResponse) {
+        EventLevel level = getLevelFromBuildStatus(jenkinsJobResponse);
+
+        var event = new StatusEvent();
         event.setId("job.jenkins." + job.getId());
         event.setName(job.getName());
-        event.setStatus(getBuildStatus(jenkinsJobResponse));
+        event.setLevel(level);
+        event.setStatusText(statusTextFromLevel(level));
 
         if (jenkinsJobResponse.getBuilds().size() == 0) {
             return Mono.just(event);
@@ -127,6 +125,16 @@ public class JenkinsJobPublisher {
                 });
     }
 
+    private Mono<StatusEvent> buildUnknownStatusEvent(JenkinsJob job) {
+        var event = new StatusEvent();
+        event.setId("job.jenkins." + job.getId());
+        event.setName(job.getName());
+        event.setLevel(EventLevel.UNKNOWN);
+        event.setStatusText("Unknown");
+        event.setTime(null);
+        return Mono.just(event);
+    }
+
     private Mono<OffsetDateTime> getBuildTime(String lastBuildUrl) {
         return makeBuildRequest(String.format("%sapi/json", lastBuildUrl))
                 .map(JenkinsBuildResponse::getTimestamp)
@@ -134,16 +142,31 @@ public class JenkinsJobPublisher {
                 .map(instant -> instant.atOffset(ZoneOffset.UTC));
     }
 
-    private JobEvent.Status getBuildStatus(JenkinsJobResponse jenkinsJobResponse) {
+    private EventLevel getLevelFromBuildStatus(JenkinsJobResponse jenkinsJobResponse) {
         if (jenkinsJobResponse.getColor().equals("disabled")) {
-            return JobEvent.Status.DISABLED;
+            return EventLevel.DISABLED;
         }
         if (jenkinsJobResponse.getColor().endsWith("_anime")) {
-            return JobEvent.Status.IN_PROGRESS;
+            return EventLevel.IN_PROGRESS;
         }
         if (jenkinsJobResponse.getColor().equals("blue")) {
-            return JobEvent.Status.SUCCESS;
+            return EventLevel.OK;
         }
-        return JobEvent.Status.FAILURE;
+        return EventLevel.ERROR;
+    }
+
+    private String statusTextFromLevel(EventLevel level) {
+        switch (level) {
+            case DISABLED:
+                return "Disabled";
+            case IN_PROGRESS:
+                return "In Progress";
+            case OK:
+                return "Success";
+            case ERROR:
+                return "Failure";
+            default:
+                return null;
+        }
     }
 }

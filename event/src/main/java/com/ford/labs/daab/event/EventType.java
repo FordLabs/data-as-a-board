@@ -17,6 +17,7 @@
 package com.ford.labs.daab.event;
 
 public class EventType {
+    public static final String STATUS = "STATUS";
     public static final String HEALTH = "HEALTH";
     public static final String JOB = "JOB";
     public static final String FIGURE = "FIGURE";

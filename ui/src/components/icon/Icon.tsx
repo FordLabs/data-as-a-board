@@ -29,7 +29,9 @@ function MDIRotate(icon: IconType) {
 export default {
     ok: MDI(IconType.DONE),
     unknown: MDI(IconType.HELP_OUTLINE),
-    warn: MDI(IconType.ERROR),
+    info: MDI(IconType.INFO),
+    warn: MDI(IconType.WARNING),
+    error: MDI(IconType.ERROR),
     disabled: MDI(IconType.CLOSE),
     unstable: MDI(IconType.CLOUD_QUEUE),
     inProgress: MDIRotate(IconType.CACHED),

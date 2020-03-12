@@ -21,7 +21,9 @@ import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.job.JenkinsJob;
 import com.ford.labs.daab.config.event.properties.job.JenkinsJobProperties;
 import com.ford.labs.daab.config.event.properties.job.JobProperties;
+import com.ford.labs.daab.event.EventLevel;
 import com.ford.labs.daab.event.JobEvent;
+import com.ford.labs.daab.event.StatusEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -114,8 +116,9 @@ class JenkinsJobPublisherTest {
                 .publish(argThat(event ->
                         event.getId().equals("job.jenkins.success")
                                 && event.getName().equals("Success")
-                                && ((JobEvent) event).getStatus().equals(JobEvent.Status.SUCCESS)
-                                && ((JobEvent) event).getUrl().equals("http://localhost:8123/job/success/1/")
+                                && event.getLevel().equals(EventLevel.OK)
+                                && ((StatusEvent) event).getStatusText().equals("Success")
+                                && event.getUrl().equals("http://localhost:8123/job/success/1/")
                                 && event.getTime().equals(Instant.ofEpochMilli(11231L).atOffset(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME))
                 ));
 
@@ -123,8 +126,9 @@ class JenkinsJobPublisherTest {
                 .publish(argThat(event ->
                         event.getId().equals("job.jenkins.failure")
                                 && event.getName().equals("Failure")
-                                && ((JobEvent) event).getStatus().equals(JobEvent.Status.FAILURE)
-                                && ((JobEvent) event).getUrl().equals("http://localhost:8123/job/failure/4/")
+                                && event.getLevel().equals(EventLevel.ERROR)
+                                && ((StatusEvent) event).getStatusText().equals("Failure")
+                                && event.getUrl().equals("http://localhost:8123/job/failure/4/")
                                 && event.getTime().equals(Instant.ofEpochMilli(11233L).atOffset(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME))
                 ));
 
@@ -132,8 +136,9 @@ class JenkinsJobPublisherTest {
                 .publish(argThat(event ->
                         event.getId().equals("job.jenkins.inprogress")
                                 && event.getName().equals("In Progress")
-                                && ((JobEvent) event).getStatus().equals(JobEvent.Status.IN_PROGRESS)
-                                && ((JobEvent) event).getUrl().equals("http://localhost:8123/job/in-progress/12/")
+                                && event.getLevel().equals(EventLevel.IN_PROGRESS)
+                                && ((StatusEvent) event).getStatusText().equals("In Progress")
+                                && event.getUrl().equals("http://localhost:8123/job/in-progress/12/")
                                 && event.getTime().equals(Instant.ofEpochMilli(11235L).atOffset(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME))
                 ));
 
@@ -141,8 +146,9 @@ class JenkinsJobPublisherTest {
                 .publish(argThat(event ->
                         event.getId().equals("job.jenkins.disabled")
                                 && event.getName().equals("Disabled")
-                                && ((JobEvent) event).getStatus().equals(JobEvent.Status.DISABLED)
-                                && ((JobEvent) event).getUrl().equals("http://localhost:8123/job/disabled/48/")
+                                && event.getLevel().equals(EventLevel.DISABLED)
+                                && ((StatusEvent) event).getStatusText().equals("Disabled")
+                                && event.getUrl().equals("http://localhost:8123/job/disabled/48/")
                                 && event.getTime().equals(Instant.ofEpochMilli(11238L).atOffset(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME))
                 ));
 
@@ -150,7 +156,8 @@ class JenkinsJobPublisherTest {
                 .publish(argThat(event ->
                         event.getId().equals("job.jenkins.unknown")
                                 && event.getName().equals("Unknown")
-                                && ((JobEvent) event).getStatus().equals(JobEvent.Status.UNKNOWN)
+                                && event.getLevel().equals(EventLevel.UNKNOWN)
+                                && ((StatusEvent) event).getStatusText().equals("Unknown")
                                 && event.getTime() == null
                 ));
     }

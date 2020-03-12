@@ -1,4 +1,5 @@
 export type EventType =
+    | "STATUS"
     | "HEALTH"
     | "JOB"
     | "FIGURE"

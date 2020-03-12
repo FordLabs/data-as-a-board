@@ -25,6 +25,7 @@ import {WeatherEvent} from "./WeatherEvent";
 import {ListEvent} from "./ListEvent";
 import {ImageEvent} from "./ImageEvent";
 import {CountdownEvent} from "./CountdownEvent";
+import {StatusEvent} from "./StatusEvent";
 
 export interface AbstractEvent {
     id: string;
@@ -35,6 +36,7 @@ export interface AbstractEvent {
 }
 
 export type Event =
+    | StatusEvent
     | HealthEvent
     | JobEvent
     | FigureEvent
@@ -50,6 +52,7 @@ export enum Level {
     OK = "OK",
     UNKNOWN = "UNKNOWN",
     DISABLED = "DISABLED",
+    IN_PROGRESS = "IN_PROGRESS",
     INFO = "INFO",
     WARN = "WARN",
     ERROR = "ERROR",

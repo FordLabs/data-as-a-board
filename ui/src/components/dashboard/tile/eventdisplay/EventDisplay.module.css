@@ -19,13 +19,13 @@
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(2.5deg);
+        transform: rotate(0.25deg);
     }
     50% {
         transform: rotate(0deg);
     }
     75% {
-        transform: rotate(-2.5deg);
+        transform: rotate(-0.25deg);
     }
     100% {
         transform: rotate(0deg);
@@ -68,12 +68,17 @@
     background-color: #880E4FDD;
 }
 
+.disabled {
+    background-color: #888C;
+    opacity: 0.5;
+}
+
 .warn {
     background-color: #F57F17DD;
 }
 
 .warn.shake {
-    animation: shake 1s linear infinite;
+    animation: shake 0.125s linear infinite;
 }
 
 .error {
@@ -81,7 +86,7 @@
 }
 
 .error.shake {
-    animation: shake 1s linear infinite;
+    animation: shake 0.125s linear infinite;
 }
 
 .header {

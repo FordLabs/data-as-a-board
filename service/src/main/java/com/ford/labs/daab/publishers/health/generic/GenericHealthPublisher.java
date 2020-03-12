@@ -19,7 +19,9 @@ package com.ford.labs.daab.publishers.health.generic;
 import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.health.HealthApplication;
 import com.ford.labs.daab.config.event.properties.health.HealthProperties;
+import com.ford.labs.daab.event.EventLevel;
 import com.ford.labs.daab.event.HealthEvent;
+import com.ford.labs.daab.event.StatusEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -90,22 +92,24 @@ public class GenericHealthPublisher {
         }
     }
 
-    private HealthEvent buildHealthEvent(HealthApplication application, boolean isUp) {
-        var event = new HealthEvent();
+    private StatusEvent buildHealthEvent(HealthApplication application, boolean isUp) {
+        var event = new StatusEvent();
         event.setId("health." + application.getId());
         event.setName(application.getName());
 
-        event.setStatus(isUp ? HealthEvent.Status.UP : HealthEvent.Status.DOWN);
+        event.setLevel(isUp ? EventLevel.OK : EventLevel.ERROR);
+        event.setStatusText(isUp ? "Up" : "Down");
 
         event.setTime(OffsetDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
         return event;
     }
 
-    private Mono<HealthEvent> eventOrCachedIfStatusIsSame(HealthEvent newEvent) {
+    private Mono<StatusEvent> eventOrCachedIfStatusIsSame(StatusEvent newEvent) {
         return eventPublishingService.getCachedEventOrEmpty(newEvent.getId())
-                .cast(HealthEvent.class)
+                .cast(StatusEvent.class)
                 .defaultIfEmpty(newEvent)
-                .map(cachedEvent -> Objects.equals(newEvent.getStatus(), cachedEvent.getStatus())
+                .onErrorResume(error -> Mono.just(newEvent))
+                .map(cachedEvent -> Objects.equals(newEvent.getLevel(), cachedEvent.getLevel())
                         ? cachedEvent
                         : newEvent
                 );

@@ -30,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "eventType", defaultImpl = Event.class)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = JobEvent.class, name = EventType.JOB),
+        @JsonSubTypes.Type(value = StatusEvent.class, name = EventType.STATUS),
         @JsonSubTypes.Type(value = FigureEvent.class, name = EventType.FIGURE),
         @JsonSubTypes.Type(value = QuoteEvent.class, name = EventType.QUOTE),
         @JsonSubTypes.Type(value = HealthEvent.class, name = EventType.HEALTH),
@@ -47,4 +48,5 @@ public class Event {
     EventLevel level = EventLevel.OK;
     String name;
     String time = OffsetDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
+    String url;
 }

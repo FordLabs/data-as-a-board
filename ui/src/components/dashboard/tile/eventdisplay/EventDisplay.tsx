@@ -16,9 +16,9 @@
 
 import React from "react";
 
-import {Event, Level} from 'model/event/Event';
+import {Event, Level} from "model/event/Event";
 
-import {EventDisplayProperties} from 'model/EventDisplayProperties';
+import {EventDisplayProperties} from "model/EventDisplayProperties";
 import styles from "./EventDisplay.module.css";
 import {TimestampDisplay} from "./TimestampDifference";
 
@@ -35,9 +35,11 @@ function mapLevelToStyle(event: Event) {
         case Level.UNKNOWN:
             return styles.unknown;
         case Level.DISABLED:
-            return styles.unknown;
+            return styles.disabled;
         case Level.INFO:
             return styles.info;
+        case Level.IN_PROGRESS:
+            return styles.inprogress
         case Level.WARN:
             return styles.warn;
         case Level.ERROR:

@@ -20,6 +20,7 @@ public enum EventLevel {
     OK,
     UNKNOWN,
     DISABLED,
+    IN_PROGRESS,
     INFO,
     WARN,
     ERROR

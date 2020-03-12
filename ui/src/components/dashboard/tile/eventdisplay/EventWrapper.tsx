@@ -41,6 +41,7 @@ import {UnknownEventDisplay} from "./UnknownEventDisplay";
 import {WeatherEventDisplay} from "./WeatherEventDisplay";
 import {CountdownEvent} from "../../../../model/event/CountdownEvent";
 import {CountdownEventDisplay} from "./CountdownEventDisplay";
+import {StatusEventDisplay} from "./StatusEventDisplay";
 
 export interface Props {
     eventDisplay: EventDisplayProperties;
@@ -72,6 +73,8 @@ function EventWrapper({event, display}: { event?: Event, display: EventDisplayPr
             return <ImageEventDisplay event={event} display={display}/>;
         case "COUNTDOWN":
             return <CountdownEventDisplay event={event} display={display}/>;
+        case "STATUS":
+            return <StatusEventDisplay event={event} display={display}/>;
         default:
             return <UnknownEventDisplay event={event} display={display}/>;
     }

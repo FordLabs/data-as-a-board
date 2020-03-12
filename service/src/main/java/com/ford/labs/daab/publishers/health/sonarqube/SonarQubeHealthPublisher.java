@@ -1,6 +1,7 @@
 package com.ford.labs.daab.publishers.health.sonarqube;
 
-import com.ford.labs.daab.event.HealthEvent;
+import com.ford.labs.daab.event.EventLevel;
+import com.ford.labs.daab.event.StatusEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,25 +20,37 @@ public class SonarQubeHealthPublisher {
 
     @PostMapping("/api/sonarqube/webhook")
     public Mono<Long> receiveAnalysis(@RequestBody AnalysisPayload payload) {
-        HealthEvent healthEvent = new HealthEvent();
+        StatusEvent event = new StatusEvent();
 
-        healthEvent.setId(String.format("health.sonarqube.%s", payload.getProject().getKey()));
-        healthEvent.setName(payload.getProject().getName());
-        healthEvent.setTime(payload.getAnalysedAt().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
-        healthEvent.setStatus(healthStatusFromSonarQubeStatus(payload.getQualityGate().getStatus()));
+        event.setId(String.format("status.sonarqube.%s", payload.getProject().getKey()));
+        event.setName(payload.getProject().getName());
+        event.setTime(payload.getAnalysedAt().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        event.setLevel(eventLevelFromSonarQubeStatus(payload.getQualityGate().getStatus()));
+        event.setStatusText(statusTextFromSonarQubeStatus(payload.getQualityGate().getStatus()));
 
         return this.eventPublishingService
-                .publish(healthEvent);
+                .publish(event);
     }
 
-    private static HealthEvent.Status healthStatusFromSonarQubeStatus(String status) {
+    private static EventLevel eventLevelFromSonarQubeStatus(String status) {
         switch (status) {
             case "OK":
-                return HealthEvent.Status.UP;
+                return EventLevel.OK;
             case "ERROR":
-                return HealthEvent.Status.DOWN;
+                return EventLevel.ERROR;
             default:
-                return HealthEvent.Status.UNKNOWN;
+                return EventLevel.UNKNOWN;
+        }
+    }
+
+    private static String statusTextFromSonarQubeStatus(String status) {
+        switch (status) {
+            case "OK":
+                return "Passed";
+            case "ERROR":
+                return "Failed";
+            default:
+                return "Unknown";
         }
     }
 }

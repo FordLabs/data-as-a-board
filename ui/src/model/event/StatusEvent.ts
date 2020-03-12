@@ -14,17 +14,11 @@
  *
  */
 
-export enum IconType {
-    DONE = "done",
-    HELP_OUTLINE = "help_outline",
-    CLOSE = "close",
-    WARNING = "warning",
-    ERROR = "error",
-    INFO = "info",
-    CLOUD_QUEUE = "cloud_queue",
-    CACHED = "cached",
-    CANCEL = "cancel",
-    ADD = "add",
-    REMOVE = "remove",
-    DELETE = "delete",
+import {AbstractEvent} from "./Event";
+
+export interface StatusEvent extends AbstractEvent {
+    statusText: string;
+    continuous: boolean;
+
+    eventType: "STATUS";
 }

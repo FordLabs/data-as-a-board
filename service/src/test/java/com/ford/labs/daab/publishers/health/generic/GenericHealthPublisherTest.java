@@ -20,7 +20,9 @@ import com.ford.labs.daab.WireMockExtension;
 import com.ford.labs.daab.config.event.properties.EventProperties;
 import com.ford.labs.daab.config.event.properties.health.HealthApplication;
 import com.ford.labs.daab.config.event.properties.health.HealthProperties;
+import com.ford.labs.daab.event.EventLevel;
 import com.ford.labs.daab.event.HealthEvent;
+import com.ford.labs.daab.event.StatusEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,10 +79,11 @@ class GenericHealthPublisherTest {
                 new HealthApplication("downbutcached", "IsDownButCached", "http://localhost:8123/downButCached", null, null)
         );
 
-        HealthEvent cachedEvent = new HealthEvent();
+        StatusEvent cachedEvent = new StatusEvent();
         cachedEvent.setId("health.id3");
-        cachedEvent.setStatus(HealthEvent.Status.DOWN);
+        cachedEvent.setLevel(EventLevel.ERROR);
         cachedEvent.setName("IsDownButCached");
+        cachedEvent.setStatusText("Down");
         cachedEvent.setTime(OffsetDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
 
         when(mockEventPublishingService.getCachedEventOrEmpty("health.downbutcached")).thenReturn(Mono.just(cachedEvent));
@@ -97,14 +100,16 @@ class GenericHealthPublisherTest {
                 .publish(argThat(event ->
                         event.getId().equals("health.up")
                                 && event.getName().equals("IsUp")
-                                && ((HealthEvent) event).getStatus().equals(HealthEvent.Status.UP)
+                                && ((StatusEvent) event).getLevel().equals(EventLevel.OK)
+                                && ((StatusEvent) event).getStatusText().equals("Up")
                 ));
 
         verify(mockEventPublishingService)
                 .publish(argThat(event ->
                         event.getId().equals("health.down")
                                 && event.getName().equals("IsDown")
-                                && ((HealthEvent) event).getStatus().equals(HealthEvent.Status.DOWN)
+                                && ((StatusEvent) event).getLevel().equals(EventLevel.ERROR)
+                                && ((StatusEvent) event).getStatusText().equals("Down")
                 ));
 
         verify(mockEventPublishingService, times(0))

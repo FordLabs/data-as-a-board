@@ -1,11 +1,9 @@
 package com.ford.labs.daab.publishers.health.sonarqube;
 
-import com.ford.labs.daab.event.HealthEvent;
+import com.ford.labs.daab.event.EventLevel;
+import com.ford.labs.daab.event.StatusEvent;
 import com.ford.labs.daab.publishers.EventPublishingService;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.data.redis.core.ReactiveHashOperations;
-import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import reactor.core.publisher.Mono;
 
 import java.time.OffsetDateTime;
@@ -45,9 +43,10 @@ public class SonarQubeHealthPublisherTest {
 
         verify(mockEventPublishingService)
                 .publish(argThat(event ->
-                        event.getId().equals("health.sonarqube.test.id")
+                        event.getId().equals("status.sonarqube.test.id")
                                 && event.getName().equals("Test Name")
-                                && ((HealthEvent) event).getStatus().equals(HealthEvent.Status.UP)
+                                && event.getLevel().equals(EventLevel.OK)
+                                && ((StatusEvent) event).getStatusText().equals("Passed")
                 ));
     }
 
@@ -72,9 +71,10 @@ public class SonarQubeHealthPublisherTest {
 
         verify(mockEventPublishingService)
                 .publish(argThat(event ->
-                        event.getId().equals("health.sonarqube.test.id")
+                        event.getId().equals("status.sonarqube.test.id")
                                 && event.getName().equals("Test Name")
-                                && ((HealthEvent) event).getStatus().equals(HealthEvent.Status.DOWN)
+                                && event.getLevel().equals(EventLevel.ERROR)
+                                && ((StatusEvent) event).getStatusText().equals("Failed")
                 ));
     }
 
@@ -99,9 +99,10 @@ public class SonarQubeHealthPublisherTest {
 
         verify(mockEventPublishingService)
                 .publish(argThat(event ->
-                        event.getId().equals("health.sonarqube.test.id")
+                        event.getId().equals("status.sonarqube.test.id")
                                 && event.getName().equals("Test Name")
-                                && ((HealthEvent) event).getStatus().equals(HealthEvent.Status.UNKNOWN)
+                                && event.getLevel().equals(EventLevel.UNKNOWN)
+                                && ((StatusEvent) event).getStatusText().equals("Unknown")
                 ));
     }
 }
