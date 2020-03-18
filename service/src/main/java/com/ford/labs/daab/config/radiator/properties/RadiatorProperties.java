@@ -20,12 +20,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
 @ConfigurationProperties(prefix="radiator")
 public class RadiatorProperties {
     String name;
-    List<PageProperties> pages;
+    List<PageProperties> pages = new ArrayList<>();
     String background;
 }

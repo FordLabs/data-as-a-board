@@ -39,7 +39,7 @@ function mapLevelToStyle(event: Event) {
         case Level.INFO:
             return styles.info;
         case Level.IN_PROGRESS:
-            return styles.inprogress
+            return styles.inprogress;
         case Level.WARN:
             return styles.warn;
         case Level.ERROR:
@@ -63,10 +63,16 @@ export const EventDisplay: React.FC<Props> = (props) => {
 
     const fillStyle = props.display.fill ? styles.event_fill : "";
     const alertStyle = props.display.isNotification ? "" : styles.shake;
+    const linkStyle = props.event.url ? styles.link : "";
 
     return <div
-        className={`${styles.event} ${fillStyle} ${alertStyle} ${mapLevelToStyle(props.event)}`}
+        className={`${styles.event} ${fillStyle} ${alertStyle} ${linkStyle} ${mapLevelToStyle(props.event)}`}
         style={props.display.isNotification ? {} : gridStyle(props.display)}
+        onClick={() => {
+            if (props.event.url) {
+                window.open(props.event.url, "_blank");
+            }
+        }}
         data-testid={`@dashboard-event-${props.event.id}`}
     >
         {!props.display.fill && <div className={styles.header}>{eventName}</div>}

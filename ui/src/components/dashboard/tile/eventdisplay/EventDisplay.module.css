@@ -49,6 +49,16 @@
     overflow: hidden;
 }
 
+.link {
+    cursor: pointer;
+    transition: filter 0.125s ease-in-out;
+    filter: brightness(100%);
+}
+
+.link:hover {
+    filter: brightness(125%);
+}
+
 .event_fill {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;

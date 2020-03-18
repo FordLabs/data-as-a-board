@@ -1,19 +1,19 @@
-import React from "react";
-import {createStore} from "redux";
-import {Provider} from "react-redux";
 import moment from "moment";
+import React from "react";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
 
-import {cleanup, render} from "@testing-library/react";
+import {act, cleanup, fireEvent, render, wait} from "@testing-library/react";
 
 import {rootReducer} from "store";
 
-import {ApplicationState} from "store/ApplicationState";
 import {Event, Level} from "model/event/Event";
+import {ApplicationState} from "store/ApplicationState";
 
-import Dashboard from "./Dashboard";
-import {EventDisplayProperties} from "../../model/EventDisplayProperties";
-import {JobEvent} from "../../model/event/JobEvent";
 import {humanizeDurationPrecise} from "../../converters/humanizeDurationPrecise";
+import {JobEvent} from "../../model/event/JobEvent";
+import {EventDisplayProperties} from "../../model/EventDisplayProperties";
+import Dashboard from "./Dashboard";
 
 describe("Dashboard", () => {
     afterEach(cleanup);
@@ -58,15 +58,15 @@ describe("Dashboard", () => {
         initialState.dashboard.configuration.pages = [
             {
                 tiles: [],
-                name: "Page 1"
+                name: "Page 1",
             },
             {
                 tiles: [],
-                name: "Page 2"
+                name: "Page 2",
             },
             {
                 tiles: [],
-                name: "Page 3"
+                name: "Page 3",
             },
         ];
 
@@ -79,28 +79,33 @@ describe("Dashboard", () => {
     });
 
     describe("should show an event", () => {
-        const initialState = baseState();
-        initialState.dashboard.configuration.pages = [
-            {
-                tiles: [{
-                    tileType: "EVENT",
-                    id: "job.test",
-                } as EventDisplayProperties],
-                name: "Page 1"
-            }
-        ];
-        initialState.dashboard.events.set("job.test", {
-            id: "job.test",
-            eventType: "JOB",
-            level: Level.OK,
-            name: "Test Event",
-            time: "2019-01-01T00:00:00.000Z",
+        let eventToTest: HTMLElement;
 
-            status: "SUCCESS",
-        } as JobEvent);
+        beforeEach(() => {
+            const initialState = baseState();
+            initialState.dashboard.configuration.pages = [
+                {
+                    tiles: [{
+                        tileType: "EVENT",
+                        id: "job.test",
+                    } as EventDisplayProperties],
+                    name: "Page 1",
+                },
+            ];
+            initialState.dashboard.events.set("job.test", {
+                id: "job.test",
+                eventType: "JOB",
+                level: Level.OK,
+                name: "Test Event",
+                time: "2019-01-01T00:00:00.000Z",
+                url: "http://testurl.local",
 
-        const {dashboard} = mountDashboard(initialState);
-        const eventToTest = dashboard.getByTestId("@dashboard-event-job.test");
+                status: "SUCCESS",
+            } as JobEvent);
+
+            const {dashboard} = mountDashboard(initialState);
+            eventToTest = dashboard.getByTestId("@dashboard-event-job.test");
+        });
 
         it("has a name", () => {
             expect(eventToTest).toHaveTextContent("TEST EVENT");
@@ -112,8 +117,19 @@ describe("Dashboard", () => {
         it("has a time", () => {
             const timeDifference = moment.duration(moment("2019-01-01T00:00:00.000Z").diff(moment()));
             expect(eventToTest).toHaveTextContent(
-                humanizeDurationPrecise(timeDifference)
+                humanizeDurationPrecise(timeDifference),
             );
+        });
+
+        it("is clickable", async () => {
+            const windowOpenSpy = jest.spyOn(window, "open");
+            // tslint:disable-next-line:no-empty
+            windowOpenSpy.mockImplementation(() => {
+            });
+            act(() => {
+                fireEvent.click(eventToTest);
+            });
+            expect(windowOpenSpy).toHaveBeenCalledWith("http://testurl.local", "_blank");
         });
     });
 
@@ -148,8 +164,8 @@ describe("Dashboard", () => {
                     tileType: "EVENT",
                     id: "job.test",
                 } as EventDisplayProperties],
-                name: "Page 1"
-            }
+                name: "Page 1",
+            },
         ];
         initialState.dashboard.events.set("job.test", {
             id: "job.test",

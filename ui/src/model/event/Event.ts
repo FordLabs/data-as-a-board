@@ -15,17 +15,18 @@
  */
 
 import {EventType} from "./EventType";
-import {HealthEvent} from "./HealthEvent";
-import {JobEvent} from "./JobEvent";
-import {FigureEvent} from "./FigureEvent";
-import {QuoteEvent} from "./QuoteEvent";
-import {PercentageEvent} from "./PercentageEvent";
-import {StatisticsEvent} from "./StatisticsEvent";
-import {WeatherEvent} from "./WeatherEvent";
-import {ListEvent} from "./ListEvent";
-import {ImageEvent} from "./ImageEvent";
+
 import {CountdownEvent} from "./CountdownEvent";
+import {FigureEvent} from "./FigureEvent";
+import {HealthEvent} from "./HealthEvent";
+import {ImageEvent} from "./ImageEvent";
+import {JobEvent} from "./JobEvent";
+import {ListEvent} from "./ListEvent";
+import {PercentageEvent} from "./PercentageEvent";
+import {QuoteEvent} from "./QuoteEvent";
+import {StatisticsEvent} from "./StatisticsEvent";
 import {StatusEvent} from "./StatusEvent";
+import {WeatherEvent} from "./WeatherEvent";
 
 export interface AbstractEvent {
     id: string;
@@ -33,6 +34,7 @@ export interface AbstractEvent {
     level: Level;
     name: string;
     time: string;
+    url: string | undefined;
 }
 
 export type Event =
@@ -46,7 +48,7 @@ export type Event =
     | WeatherEvent
     | ListEvent
     | ImageEvent
-    | CountdownEvent
+    | CountdownEvent;
 
 export enum Level {
     OK = "OK",

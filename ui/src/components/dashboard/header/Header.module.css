@@ -27,6 +27,13 @@
 
     display: grid;
     grid-template-columns: 200px auto 200px;
+    transition: filter 0.125s ease-in-out;
+    filter: brightness(100%);
+    cursor: pointer;
+}
+
+.header:hover {
+    filter: brightness(125%);
 }
 
 .timeDisplay {
