@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
+    - name: Gradle Wrapper Validation
+      uses: gradle/wrapper-validation-action@v1.0.3
     - name: Build with Gradle
       run: ./gradlew build
     - name: Release artifact
