@@ -7,7 +7,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "material-icons-font": "^1.4.2",
     "moment": "^2.24.0",
     "react": "^16.11.0",
