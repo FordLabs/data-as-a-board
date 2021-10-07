@@ -1,5 +1,9 @@
 # Data as a Board
 
+ARCHIVED (temporarily?)
+
+With the COVID-19 pandemic and the subsequent transition to primarily remote work, there is less of a need for an in-office radiator.
+
 ![build](https://github.com/FordLabs/data-as-a-board/workflows/build/badge.svg?branch=master)
 
 Your radiator, your way!
